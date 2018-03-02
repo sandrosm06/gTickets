@@ -1,0 +1,33 @@
+<div class="jumbotron mt-3">
+    <h1 class="display-3">Lugares!</h1>
+    <table id="entry-grid" datatable="ng" class="table table-hover">
+		    <thead>
+		      <tr>
+		        <!--th style="width: 1%" class="text-center">No.</th-->
+		        <th>Nombre</th>
+		        <th>Dirección</th>
+		        <th>Aforo</th>
+		        <th>Teléfono Contacto</th>
+		        <th>Acciones</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr align="left" *ngFor="let venue of venues">
+		        <td>{{venue.name}}</td>
+		        <td>{{venue.address}}</td>
+		        <td>{{venue.totalSeats}}</td>
+		        <td>{{venue.phone}}</td>
+		        <td>
+		          
+		          <!--div class="botones" *ngIf="confirmado== venue.idVenue"-->
+		          	<a (click)="addEvent(venue.idVenue);" class="btn btn-sm btn-success">Agregar Evento</a>
+		          	<a (click)="onDeleteRow(venue.idVenue);" class="btn btn-sm btn-danger">Eliminar</a>
+		          <!--/div-->
+		        </td>
+		      </tr>     
+		    </tbody>
+	  	</table>
+	  	<div class="botones">
+	  		<a (click)="addNewVenue();" class="btn btn-sm btn-success">Agregar Nuevo Lugar</a>
+	  	</div>
+  </div>

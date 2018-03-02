@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -20,6 +21,8 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth.guard';
+import { VenuesComponent } from './components/venues/venues.component';
+import { VenuesService } from './services/venues.service';
 
 @NgModule({
   declarations: [
@@ -29,11 +32,13 @@ import { AuthGuard } from './guards/auth.guard';
     RegisterPageComponent,
     LoginPageComponent,
     PrivatePageComponent,
-    NotFoundPageComponent
+    NotFoundPageComponent,
+    VenuesComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    HttpModule,
     AppRoutingModule,
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -42,7 +47,8 @@ import { AuthGuard } from './guards/auth.guard';
   providers: [
     AuthService,
     AuthGuard,
-    FlashMessagesService
+    FlashMessagesService,
+    VenuesService
   ],
   bootstrap: [AppComponent]
 })

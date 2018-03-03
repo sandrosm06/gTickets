@@ -23,6 +23,7 @@ import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth.guard';
 import { VenuesComponent } from './components/venues/venues.component';
 import { VenuesService } from './services/venues.service';
+import { AddVenueComponent } from './components/add-venue/add-venue.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { VenuesService } from './services/venues.service';
     LoginPageComponent,
     PrivatePageComponent,
     NotFoundPageComponent,
-    VenuesComponent
+    VenuesComponent,
+    AddVenueComponent
   ],
   imports: [
     BrowserModule,

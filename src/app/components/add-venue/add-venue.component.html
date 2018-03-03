@@ -1,0 +1,27 @@
+    <div class="jumbotron mt-5">
+    <h2>{{title}}</h2>
+      <form #formAddVenue="ngForm" (ngSubmit)="onSubmit()" id="form-add-venue">
+        <div class="form-group">
+          <label for="name">Lugar</label>
+          <input class="form-control" type="text" id="name" name="name" [(ngModel)]="venue.name" placeholder="lugar">
+        </div>
+    
+        <div class="form-group">
+          <label for="address">Dirección</label>
+          <input class="form-control" type="text" id="address" name="address" [(ngModel)]="venue.address" placeholder="dirección">
+        </div>
+    
+        <div class="form-group">
+          <label for="phone">Teléfono Contacto</label>
+          <input class="form-control" type="text" id="phone" name="phone" [(ngModel)]="venue.phone" placeholder="Teléfono">
+        </div>
+    
+        <div class="form-group">
+          <label for="totalSeats">Capacidad de asistentes</label>
+          <input class="form-control" type="text" id="totalSeats" name="totalSeats" [(ngModel)]="venue.totalSeats" placeholder="Capacidad">
+        </div>
+    
+        <button type="submit" class="btn btn-default">Siguiente</button>
+    
+      </form>  
+    </div>

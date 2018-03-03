@@ -1,0 +1,58 @@
+<div class="jumbotron mt-5">
+  <div *ngFor="let totalSeats of aforo">
+  <h3>Aforo Total: {{totalSeats.totalSeats}}</h3>
+  </div>
+  <h3>Aforo Configurado: {{aforoTotal}}</h3>
+  <form #formConfigurations="ngForm" (ngSubmit)="onSubmit()" id="form-configurations">
+    <div class="form-group">
+      <label for="localidad">Localidad</label>
+      <input class="form-control" type="text" id="localidad" name="localidad" [(ngModel)]="name" placeholder="nombre de la localidad, ej. tribuna">
+    </div>
+
+    <div class="form-group">
+      <label for="seatsNumber">Número de Asientos/Asistentes</label>
+      <input class="form-control" type="text" id="seatsNumber" name="seatsNumber" [(ngModel)]="seats"  placeholder="Asistentes">
+    </div>
+
+      <a (click)="addConfigurationTable(name, seats);" class="btn btn-sm btn-warning">Agregar</a>
+
+    <table id="entry-grid" datatable="ng" class="table table-hover">
+      <thead>
+        <tr>
+          <!--th style="width: 1%" class="text-center">No.</th-->
+          <th>Localidad</th>
+          <th>Número de Asistentes</th>
+          <th>Acciones</th>
+          <!--th></th-->
+        </tr>
+      </thead>
+      <tbody>
+        <tr align="left" *ngFor="let configuration of localidades">
+          <td>{{configuration.name}}</td>
+          <td>{{configuration.seats}}</td>
+          <td>
+            <div class="botones" *ngIf="confirmado != configuration.idConfiguration">
+              <a (click)="borrarConfirm(configuration);" class="btn btn-sm btn-danger">X</a>
+            </div>
+            <div class="botones" *ngIf="confirmado== configuration.idConfiguration">
+              <a (click)="onDeleteConfiguration(configuration);" class="btn btn-sm btn-danger">Quiero eliminarlo</a>
+              <a (click)="cancelarConfirm();" class="btn btn-sm btn-warning">Cancelar</a>
+            </div>
+          </td>
+        </tr>     
+      </tbody>
+    </table>
+      <div *ngIf="aforo;else noAforo">
+        <div *ngFor="let totalSeats of aforo">
+          <div *ngIf="aforoTotal <= totalSeats.totalSeats; else other_content">
+            <!--input type="submit" value="{{title}}" [disabled]="!formConfigurations.form.valid" class="btn btn-success" /-->
+          <button type="submit" class="btn btn-default">Siguiente</button>
+        </div>
+        <ng-template #other_content><h2>¡El número de asistentes no puede superar el aforo total!</h2></ng-template>
+
+      </div>
+      <ng-template #noAforo>Ingrese al menos una localidad...</ng-template>
+    </div>
+
+  </form>
+</div>

@@ -9,6 +9,8 @@ import { VenuesComponent } from './components/venues/venues.component';
 import { AddVenueComponent } from './components/add-venue/add-venue.component';
 import { AddEventComponent } from './components/add-event/add-event.component';
 import { AuthGuard } from './guards/auth.guard';
+import { AddConfigurationsComponent } from './components/add-configurations/add-configurations.component';
+
 
 
 const routes: Routes = [
@@ -19,6 +21,7 @@ const routes: Routes = [
   {path: 'venues', component: VenuesComponent, canActivate: [AuthGuard]},
   {path: 'add-venue', component: AddVenueComponent, canActivate: [AuthGuard]},
   {path: 'add-event/:idVenue', component: AddEventComponent, canActivate: [AuthGuard]},
+  {path: 'add-configurations/:idEvent', component: AddConfigurationsComponent},
   {path: '**', component: NotFoundPageComponent}
 ];
 

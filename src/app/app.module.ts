@@ -24,8 +24,11 @@ import { AuthGuard } from './guards/auth.guard';
 import { VenuesComponent } from './components/venues/venues.component';
 import { VenuesService } from './services/venues.service';
 import { EventService } from './services/event.service';
+import { ConfigurationService } from './services/configuration.service';
+import { EventInformationService } from './services/event-information.service';
 import { AddVenueComponent } from './components/add-venue/add-venue.component';
 import { AddEventComponent } from './components/add-event/add-event.component';
+import { AddConfigurationsComponent } from './components/add-configurations/add-configurations.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,8 @@ import { AddEventComponent } from './components/add-event/add-event.component';
     NotFoundPageComponent,
     VenuesComponent,
     AddVenueComponent,
-    AddEventComponent
+    AddEventComponent,
+    AddConfigurationsComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +58,9 @@ import { AddEventComponent } from './components/add-event/add-event.component';
     AuthGuard,
     FlashMessagesService,
     VenuesService,
-    EventService
+    EventService,
+    EventInformationService,
+    ConfigurationService
   ],
   bootstrap: [AppComponent]
 })

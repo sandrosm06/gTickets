@@ -23,7 +23,9 @@ import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guards/auth.guard';
 import { VenuesComponent } from './components/venues/venues.component';
 import { VenuesService } from './services/venues.service';
+import { EventService } from './services/event.service';
 import { AddVenueComponent } from './components/add-venue/add-venue.component';
+import { AddEventComponent } from './components/add-event/add-event.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import { AddVenueComponent } from './components/add-venue/add-venue.component';
     PrivatePageComponent,
     NotFoundPageComponent,
     VenuesComponent,
-    AddVenueComponent
+    AddVenueComponent,
+    AddEventComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +53,8 @@ import { AddVenueComponent } from './components/add-venue/add-venue.component';
     AuthService,
     AuthGuard,
     FlashMessagesService,
-    VenuesService
+    VenuesService,
+    EventService
   ],
   bootstrap: [AppComponent]
 })

@@ -7,6 +7,7 @@ import { PrivatePageComponent } from './components/private-page/private-page.com
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 import { VenuesComponent } from './components/venues/venues.component';
 import { AddVenueComponent } from './components/add-venue/add-venue.component';
+import { AddEventComponent } from './components/add-event/add-event.component';
 import { AuthGuard } from './guards/auth.guard';
 
 
@@ -16,7 +17,8 @@ const routes: Routes = [
   {path: 'register', component: RegisterPageComponent},
   {path: 'private', component: PrivatePageComponent, canActivate: [AuthGuard]},
   {path: 'venues', component: VenuesComponent, canActivate: [AuthGuard]},
-  {path: 'add-venue', component: AddVenueComponent},
+  {path: 'add-venue', component: AddVenueComponent, canActivate: [AuthGuard]},
+  {path: 'add-event/:idVenue', component: AddEventComponent, canActivate: [AuthGuard]},
   {path: '**', component: NotFoundPageComponent}
 ];
 

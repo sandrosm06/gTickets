@@ -1,0 +1,23 @@
+<div class="jumbotron mt-5">
+  <form #formAddEvent="ngForm" (ngSubmit)="onSubmit()" id="form-add-event">
+    <div class="form-group">
+      <label for="name">
+        Nombre del Evento
+        <span *ngIf="!name.valid && name.touched" class="label label-danger">El nombre del evento es obligatorio</span>
+      </label>
+      <input class="form-control" type="text" #name="ngModel" id="name" name="name" [(ngModel)]="event.name" placeholder="Nombre del Evento" required="">
+    </div>
+
+    <div class="form-group">
+      <label for="date">
+        Fecha
+        <span *ngIf="!date.valid && date.touched" class="label label-danger">La Fecha del evento es obligatoria</span>
+      </label>
+      <input class="form-control" type="text" #date="ngModel" id="date" name="date" [(ngModel)]="event.date" placeholder="fecha" required="">
+    </div>
+    <div class="form-group">
+      <h3>Artistas</h3>
+    </div>
+    <button type="submit" class="btn btn-default" [disabled]="!formAddEvent.form.valid" >Siguiente</button>
+  </form>  
+</div>

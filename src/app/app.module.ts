@@ -27,6 +27,8 @@ import { VenuesService } from './services/venues.service';
 import { EventService } from './services/event.service';
 import { SectionService } from './services/section.service';
 import { ConfigurationService } from './services/configuration.service';
+import { GenerateService } from './services/generate.service';
+import { ExcelService } from './services/excel.service';
 import { RowService } from './services/row.service'; 
 import { EventInformationService } from './services/event-information.service';
 import { AddVenueComponent } from './components/add-venue/add-venue.component';
@@ -35,6 +37,7 @@ import { AddConfigurationsComponent } from './components/add-configurations/add-
 import { AddSectionComponent } from './components/add-section/add-section.component';
 import { SectionsComponent } from './components/sections/sections.component';
 import { AddRowsComponent } from './components/add-rows/add-rows.component';
+import { GenerateTicketsComponent } from './components/generate-tickets/generate-tickets.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +54,8 @@ import { AddRowsComponent } from './components/add-rows/add-rows.component';
     AddConfigurationsComponent,
     AddSectionComponent,
     SectionsComponent,
-    AddRowsComponent
+    AddRowsComponent,
+    GenerateTicketsComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +76,9 @@ import { AddRowsComponent } from './components/add-rows/add-rows.component';
     EventInformationService,
     ConfigurationService,
     SectionService,
-    RowService
+    RowService,
+    GenerateService,
+    ExcelService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,42 @@
+<div class="jumbotron mt-5">
+  <table id="entry-grid" datatable="ng" class="table table-hover">
+    <thead>
+      <tr align="left">
+        <!--th style="width: 1%" class="text-center">No.</th-->
+        <th>Localidad</th>
+        <th>Seccion</th>
+        <th>Fila</th>
+        <th>Numero de Asientos x Fila</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr align="left" *ngFor="let row of rows">
+        <td>{{row.localidad}}</td>
+        <td>{{row.sectionName}}</td>
+        <td>{{row.rowName}}</td>
+        <td>{{row.seatsPerRow}}</td>
+        <td>
+          <!--a (click)="generarTickets(row);" class="btn btn-sm btn-danger">Generar Boletos</a-->
+
+          
+          <div *ngIf="!isGenerated(row.idRow)">
+            <a (click)="generarTickets(row);" class="btn btn-sm btn-success">Generar Boletos</a>
+          </div>
+          
+          <div *ngIf="isGenerated(row.idRow)">			    		
+            <a (click)="generarArchivo(row.idRow);" class="btn btn-sm btn-success"><i class="fa fa-download"> Ver Archivo</i></a>
+          </div>
+          
+          <!--div class="botones" *ngIf="confirmado != configuration.idConfiguration">
+            <a (click)="borrarConfirm(configuration);" class="btn btn-sm btn-danger">X</a>
+          </div>
+          <div class="botones" *ngIf="confirmado== configuration.idConfiguration">
+            <a (click)="onDeleteConfiguration(configuration.idConfiguration);" class="btn btn-sm btn-danger">Quiero eliminarlo</a>
+            <a (click)="cancelarConfirm();" class="btn btn-sm btn-warning">Cancelar</a>
+          </div-->
+        </td>
+      </tr>     
+    </tbody>
+  </table>
+</div>

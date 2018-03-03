@@ -4,6 +4,7 @@ export class Venue{
 		public name: string,
 		public address: string,
 		public totalSeats: string,
-		public phone: string
+		public phone: string,
+		public uid: string
 	){}
 }

@@ -16,8 +16,8 @@ export class VenuesService {
   }
 
 
-  getVenues(){
-		return this._http.get(this.url+'get-venues').map(res => res.json());
+  getVenues(uid:string){
+		return this._http.get(this.url+'get-venues/'+uid).map(res => res.json());
 	}
 
 	saveVenue(venue: any){

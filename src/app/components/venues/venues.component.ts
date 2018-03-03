@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { VenuesService } from '../../services/venues.service';
+import { AuthService } from '../../services/auth.service';
+
 
 @Component({
   selector: 'app-venues',
@@ -11,19 +13,44 @@ export class VenuesComponent implements OnInit {
 
   public venues=[];
 	public message:string;
+	public isLogin:boolean;
+  public username:string;
+	public emailUser:string;
+	public uid:string;
 
   constructor(
     private _route: ActivatedRoute,
 		private _router: Router,
-		private _venueService: VenuesService
+		private _venueService: VenuesService,
+		private _authService: AuthService
   ) { }
 
   ngOnInit() {
-    //console.log('Se ha cargado el componente home.component.ts');
-		this.getVenues();
-  }
+		//console.log('Se ha cargado el componente home.component.ts');
+		this.getUid();
+		//this.getVenues();
+	}
+	getUid(){
+		
+		this._authService.getAuth().subscribe( auth => {
+      if(auth){
+				//console.log("entra");
+        //console.log(auth.uid);
+				this.uid = auth.uid;
+				this.isLogin = true;
+				this.emailUser = auth.email;
+				this.getVenues();
+				
+      }else{
+				this.isLogin = false;
+				
+      }
+		});
+		
+	}
   getVenues(){
-		this._venueService.getVenues().subscribe(
+		console.log(this.uid);
+		this._venueService.getVenues(this.uid).subscribe(
 			response => {
 				if(response.code == 200){
 					this.venues = response.data;

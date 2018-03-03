@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 import { VenuesService } from '../../services/venues.service';
 import { Venue } from '../../models/venue';
 
@@ -13,17 +14,33 @@ export class AddVenueComponent implements OnInit {
   public title: string;
 	public venue: Venue;
 	public venues=[];
-  public message:string;
+	public message:string;
+	public isLogin:boolean;
+  public username:string;
+	public emailUser:string;
+	public uid:string;
   
   constructor(
     private _route: ActivatedRoute,
 		private _router: Router,
-		private _venueService: VenuesService
+		private _venueService: VenuesService,
+		private _authService: AuthService
   ) { 
-    this.venue = new Venue(0,'','','','');
+    this.venue = new Venue(0,'','','','', '');
   }
 
   ngOnInit() {
+		this._authService.getAuth().subscribe( auth => {
+      if(auth){
+        console.log(auth.uid);
+        this.isLogin = true;
+				this.emailUser = auth.email;
+				this.venue.uid = auth.uid;
+      }else{
+        this.isLogin = false;
+      }
+		});
+		
     this.getVenues();
   }
 
@@ -51,7 +68,7 @@ export class AddVenueComponent implements OnInit {
 	}
 
 	getVenues(){
-		this._venueService.getVenues().subscribe(
+		this._venueService.getVenues(this.venue.uid).subscribe(
 			response => {
 				if(response.code == 200){
 					this.venues = response.data;

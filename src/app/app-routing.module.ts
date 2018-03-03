@@ -12,8 +12,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { AddConfigurationsComponent } from './components/add-configurations/add-configurations.component';
 import { AddSectionComponent } from './components/add-section/add-section.component';
 import { SectionsComponent } from './components/sections/sections.component';
-
-
+import { AddRowsComponent } from './components/add-rows/add-rows.component';
 
 const routes: Routes = [
   {path: '', component: HomePageComponent},
@@ -25,6 +24,7 @@ const routes: Routes = [
   {path: 'add-event/:idVenue', component: AddEventComponent, canActivate: [AuthGuard]},
   {path: 'add-configurations/:idEvent', component: AddConfigurationsComponent, canActivate: [AuthGuard]},
   {path: 'add-sections/:idEvent', component: AddSectionComponent, canActivate: [AuthGuard]},
+  {path: 'add-rows/:idEvent', component: AddRowsComponent, canActivate: [AuthGuard]},
   {path: '**', component: NotFoundPageComponent}
 ];
 

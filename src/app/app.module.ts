@@ -27,12 +27,14 @@ import { VenuesService } from './services/venues.service';
 import { EventService } from './services/event.service';
 import { SectionService } from './services/section.service';
 import { ConfigurationService } from './services/configuration.service';
+import { RowService } from './services/row.service'; 
 import { EventInformationService } from './services/event-information.service';
 import { AddVenueComponent } from './components/add-venue/add-venue.component';
 import { AddEventComponent } from './components/add-event/add-event.component';
 import { AddConfigurationsComponent } from './components/add-configurations/add-configurations.component';
 import { AddSectionComponent } from './components/add-section/add-section.component';
 import { SectionsComponent } from './components/sections/sections.component';
+import { AddRowsComponent } from './components/add-rows/add-rows.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,8 @@ import { SectionsComponent } from './components/sections/sections.component';
     AddEventComponent,
     AddConfigurationsComponent,
     AddSectionComponent,
-    SectionsComponent
+    SectionsComponent,
+    AddRowsComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +71,8 @@ import { SectionsComponent } from './components/sections/sections.component';
     EventService,
     EventInformationService,
     ConfigurationService,
-    SectionService
+    SectionService,
+    RowService
   ],
   bootstrap: [AppComponent]
 })

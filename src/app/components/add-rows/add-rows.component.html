@@ -1,0 +1,89 @@
+<div class="jumbotron">
+  <form #formAddRows="ngForm" (ngSubmit)="onSubmit()" id="form-add-rows">
+    <div class="form-group">
+      <label>Localidades</label>
+      <ng-select [items]="configurations"
+                bindLabel="name"
+                bindValue="idConfiguration"
+                placeholder="Selecciona la Localidad"
+                [(ngModel)]="idConfiguration"
+                (change)="selected($event)"
+                [ngModelOptions]="{standalone: true}">
+      </ng-select>
+    </div>
+
+    <div class="form-group">
+      <label>Secciones</label>
+      <ng-select [items]="sections"
+                bindLabel="name"
+                bindValue="idSection"
+                placeholder="Selecciona la Localidad"
+                [(ngModel)]="idSection"
+                (change)="selectedSection($event)"
+                [ngModelOptions]="{standalone: true}">
+      </ng-select>
+    </div>
+
+    <div>
+      <div *ngFor="let totalSeats of aforo">
+        <h3>Aforo Total: {{totalSeats.totalSeats}}</h3>
+      </div>
+      <h4>Cantidad de Asistentes en esta Localidad: {{asistentes}}</h4>
+    </div>
+
+    <div class="form-group">
+      <label for="name">Número de fila</label>
+      <input class="form-control" type="text" id="name" name="name" [(ngModel)]="name" placeholder="número de fila">
+    </div>
+
+    <div class="form-group">
+      <label for="seatsPerRow">Asientos por fila</label>
+      <input class="form-control" type="text" id="seatsPerRow" name="seatsPerRow"  [(ngModel)]="seats" placeholder="cantidad de asientos por fila">
+    </div>
+
+    <a (click)="addRowTable(name, seats);" class="btn btn-sm btn-warning">Agregar</a>
+
+    <table id="entry-grid" datatable="ng" class="table table-hover">
+      <thead>
+        <tr>
+          <!--th style="width: 1%" class="text-center">No.</th-->
+          <th>Localidad</th>
+          <th>Seccion</th>
+          <th>Fila</th>
+          <th>Numero de Asientos x Fila</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr align="left" *ngFor="let row of rows">
+          <td>{{row.localidad}}</td>
+          <td>{{row.seccion}}</td>
+          <td>{{row.name}}</td>
+          <td>{{row.seats}}</td>
+          <td>
+            
+            <div class="botones" *ngIf="confirmado== row.idRow">
+              <a (click)="onDeleteRow(row);" class="btn btn-sm btn-danger">Quiero eliminarlo</a>
+            </div>
+          </td>
+        </tr>     
+      </tbody>
+    </table>
+
+  <div *ngIf="aforo;else noAforo">
+      <div *ngFor="let totalSeats of aforo">
+        <div *ngIf="aforoTotal <= totalSeats.totalSeats; else other_content">
+          <div *ngIf="aforoSeccion<=asistentes;else noAforoLocalidad">
+            <button type="submit" class="btn btn-default">Siguiente</button>
+          </div>
+          <ng-template #noAforoLocalidad><h2>¡El número de asistentes SUPERA el aforo de esta localidad!</h2></ng-template>
+      </div>
+      <ng-template #other_content><h2>¡El número de asistentes no puede superar el aforo total!</h2></ng-template>
+    </div>
+    <ng-template #noAforo>Ingrese al menos una localidad...</ng-template>
+
+  </div>
+    <!--button type="submit" class="btn btn-default">Siguiente</button-->
+
+  </form>
+</div>

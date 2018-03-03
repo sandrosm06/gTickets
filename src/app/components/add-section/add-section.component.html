@@ -1,0 +1,56 @@
+<div class="jumbotron mt-5">
+    <h2>{{title}}</h2>
+  
+    <form #formAddSection="ngForm" (ngSubmit)="onSubmit()" id="form-add-section" class="col-lg-6">
+      <div class="form-group">
+        <label>Configuraciones</label>
+        <ng-select [items]="configurations"
+                   bindLabel="name"
+                   bindValue="idConfiguration"
+                   placeholder="Selecciona la Localidad"
+                   class="form-control"
+                   [(ngModel)]="idEvent"
+                   (change)="selected($event)"
+                   [ngModelOptions]="{standalone: true}">
+          </ng-select>
+      </div>
+  
+      <div class="form-group">
+        <label for="name">Nombre de la sección</label>
+        <input class="form-control" type="text" id="name" name="name" [(ngModel)]="name" placeholder="nombre de la seccion">
+      </div>
+  
+      
+      <a (click)="addSectionTable(name);" class="btn btn-sm btn-warning">Agregar</a>
+  
+      <table id="entry-grid" datatable="ng" class="table table-hover">
+        <thead>
+          <tr>
+            <!--th style="width: 1%" class="text-center">No.</th-->
+            <th>Localidad</th>
+            <th>Seccion</th>
+            <th>Acciones</th>
+            <!--th></th-->
+          </tr>
+        </thead>
+        <tbody>
+          <tr align="left" *ngFor="let section of sectionsConf">
+            <td>{{section.localidad}}</td>
+            <td>{{section.name}}</td>
+            <td>
+              <div class="botones" *ngIf="confirmado== section.idSection">
+                <a (click)="onDeleteSection(section);" class="btn btn-sm btn-danger">Quiero eliminarlo</a>
+              </div>
+            </td>
+          </tr>     
+        </tbody>
+      </table>
+  
+      <button type="submit" class="btn btn-default">Siguiente</button>
+  
+    </form>
+  
+  
+  
+  
+    </div>

@@ -10,6 +10,8 @@ import { AddVenueComponent } from './components/add-venue/add-venue.component';
 import { AddEventComponent } from './components/add-event/add-event.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AddConfigurationsComponent } from './components/add-configurations/add-configurations.component';
+import { AddSectionComponent } from './components/add-section/add-section.component';
+import { SectionsComponent } from './components/sections/sections.component';
 
 
 
@@ -21,7 +23,8 @@ const routes: Routes = [
   {path: 'venues', component: VenuesComponent, canActivate: [AuthGuard]},
   {path: 'add-venue', component: AddVenueComponent, canActivate: [AuthGuard]},
   {path: 'add-event/:idVenue', component: AddEventComponent, canActivate: [AuthGuard]},
-  {path: 'add-configurations/:idEvent', component: AddConfigurationsComponent},
+  {path: 'add-configurations/:idEvent', component: AddConfigurationsComponent, canActivate: [AuthGuard]},
+  {path: 'add-sections/:idEvent', component: AddSectionComponent, canActivate: [AuthGuard]},
   {path: '**', component: NotFoundPageComponent}
 ];
 

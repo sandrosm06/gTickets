@@ -38,6 +38,7 @@ import { AddSectionComponent } from './components/add-section/add-section.compon
 import { SectionsComponent } from './components/sections/sections.component';
 import { AddRowsComponent } from './components/add-rows/add-rows.component';
 import { GenerateTicketsComponent } from './components/generate-tickets/generate-tickets.component';
+import { EventsComponent } from './components/events/events.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { GenerateTicketsComponent } from './components/generate-tickets/generate
     AddSectionComponent,
     SectionsComponent,
     AddRowsComponent,
-    GenerateTicketsComponent
+    GenerateTicketsComponent,
+    EventsComponent
   ],
   imports: [
     BrowserModule,

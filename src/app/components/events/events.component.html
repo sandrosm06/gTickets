@@ -1,0 +1,44 @@
+<div class="jumbotron mt-5">
+  <h1 class="display-4">Eventos Disponibles</h1>
+  <table id="entry-grid" datatable="ng" class="table table-hover">
+    <thead>
+      <tr align="left">
+        <!--th style="width: 1%" class="text-center">No.</th-->
+        <th>Nombre del Evento</th>
+        <th>Fecha</th>
+        <th>Lugar</th>
+        <th>Direccion</th>
+        <th>Contacto</th>
+        <th>Aforo</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr align="left" *ngFor="let event of events">
+        <td>{{event.nameEvent}}</td>
+        <td>{{event.date}}</td>
+        <td>{{event.venue}}</td>
+        <td>{{event.address}}</td>
+        <td>{{event.phone}}</td>
+        <td>{{event.seats}}</td>
+        <td>
+          <!--a (click)="generarTickets(row);" class="btn btn-sm btn-danger">Generar Boletos</a-->
+
+          
+          
+            <a class="btn btn-sm btn-success"><i class="fa fa-eye"> Ver</i></a>
+
+            <a class="btn btn-sm btn-danger"><i class="fa fa-minus-circle"> Eliminar</i></a>
+          
+          <!--div class="botones" *ngIf="confirmado != configuration.idConfiguration">
+            <a (click)="borrarConfirm(configuration);" class="btn btn-sm btn-danger">X</a>
+          </div>
+          <div class="botones" *ngIf="confirmado== configuration.idConfiguration">
+            <a (click)="onDeleteConfiguration(configuration.idConfiguration);" class="btn btn-sm btn-danger">Quiero eliminarlo</a>
+            <a (click)="cancelarConfirm();" class="btn btn-sm btn-warning">Cancelar</a>
+          </div-->
+        </td>
+      </tr>     
+    </tbody>
+  </table>
+</div>

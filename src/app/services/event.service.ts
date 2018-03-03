@@ -15,9 +15,11 @@ export class EventService{
 		this.url = GLOBAL.url;
 	}
 
-	getEvent(){
-		return this._http.get(this.url+'get-event').map(res => res.json());
+	getEvent(uid:string){
+		//console.log(uid);
+		return this._http.get(this.url+'get-events/'+uid).map(res => res.json());
 	}
+
 	getLastEvent(){
 		return this._http.get(this.url+'get-last-event').map(res => res.json());
 	}

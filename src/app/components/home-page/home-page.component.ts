@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
@@ -6,10 +8,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit {
+  public isLogin:boolean;
+  public username:string;
+  public emailUser:string;
 
-  constructor() { }
+  constructor(
+    private _authService: AuthService,
+    private _router: Router
+  ) { }
 
   ngOnInit() {
+    this._authService.getAuth().subscribe( auth => {
+      if(auth){
+        this.isLogin = true;
+        this.username = auth.displayName;
+        this.emailUser = auth.email;
+        
+      }else{
+        this.isLogin = false;
+      }
+    });
+
   }
 
 }

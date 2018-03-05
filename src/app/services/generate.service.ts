@@ -31,6 +31,7 @@ export class GenerateService {
 		return this._http.post(this.url+'generate-tickets', params, {headers: headers})
 						 .map(res => res.json());
 	}
+	
 
 	isTicketsGenerated(row){
 		//console.log(row);
@@ -41,6 +42,9 @@ export class GenerateService {
 		return this._http.get(this.url+'get-rows-generated').map(res => res.json());
 	}
 
+	getRowsGeneratedEvent(idEvent:number){
+		return this._http.get(this.url+'get-rows-generated-event/'+idEvent).map(res => res.json());
+	}
 	
 	getTickets(idRow: number){
 		return this._http.get(this.url+'get-tickets/'+idRow).map(res => res.json());

@@ -44,7 +44,10 @@ export class EventsComponent implements OnInit {
 		});
 		
   }
-  
+  viewDetail(idEvent:any){
+    console.log(idEvent);
+    this._router.navigate(["/event-detail/"+idEvent]);
+  }
   getEvents(){
     this._eventService.getEvent(this.uid).subscribe(
 			response => {

@@ -20,6 +20,10 @@ export class EventService{
 		return this._http.get(this.url+'get-events/'+uid).map(res => res.json());
 	}
 
+	getEventDetail(id:number){
+		//console.log(uid);
+		return this._http.get(this.url+'get-event-detail/'+id).map(res => res.json());
+	}
 	getLastEvent(){
 		return this._http.get(this.url+'get-last-event').map(res => res.json());
 	}
@@ -33,4 +37,6 @@ export class EventService{
 		return this._http.post(this.url+'save_event', params, {headers: headers})
 						 .map(res => res.json());
 	}
+
+	
 }

@@ -1,0 +1,66 @@
+<div class="jumbotron mt-5" *ngFor="let e of event">
+  <h3>
+    Lugar:
+    <small class="text-muted">{{e.venue}}</small>
+  </h3>  
+  <h3>
+    Dirección:
+    <small class="text-muted">{{e.address}}</small>
+  </h3>
+  <h3>
+    Teléfono de contacto:
+    <small class="text-muted">{{e.phone}}</small>
+  </h3>  
+  <h3>
+    Aforo:
+    <small class="text-muted">{{e.seats}}</small>
+  </h3> 
+  <hr class="mt-3" />
+  <h3>
+    Nombre del Evento:
+    <small class="text-muted">{{e.nameEvent}}</small>
+  </h3>
+  <h3>
+    Fecha:
+    <small class="text-muted">{{e.date}}</small>
+  </h3>
+
+  
+
+</div>
+
+<div class="card border-primary mb-3">
+    <table id="entry-grid" datatable="ng" class="table table-hover">
+      <thead>
+        <tr align="left">
+          <th>Localidad</th>
+          <th>Aforo</th>
+          <th>Sección</th>
+          <th>Fila</th>
+          <th>Aforo por Fila</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr align="left" *ngFor="let row of rows">
+          <td>{{row.localidad}}</td>
+          <td>{{row.seatsNumber}}</td>
+          <td>{{row.sectionName}}</td>
+          <td>{{row.rowName}}</td>
+          <td>{{row.seatsPerRow}}</td>
+          <td>
+            
+              <div *ngIf="!isGenerated(row.idRow);else noGenerate">
+                  <a class="btn btn-sm btn-danger" (click)="generarTickets(row);"><i class="fa fa-minus-circle"> Generar tickets</i></a>
+              </div>
+              <ng-template #noGenerate>
+                  <a class="btn btn-sm btn-success" (click)="generarArchivo(row.idRow);" ><i class="fa fa-eye"> Ver Boletos</i></a>
+              </ng-template>
+
+              
+              
+          </td>
+        </tr>     
+      </tbody>
+</table>
+  </div>

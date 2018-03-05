@@ -15,6 +15,7 @@ import { SectionsComponent } from './components/sections/sections.component';
 import { AddRowsComponent } from './components/add-rows/add-rows.component';
 import { GenerateTicketsComponent } from './components/generate-tickets/generate-tickets.component';
 import { EventsComponent } from './components/events/events.component';
+import { EventDetailComponent } from './components/event-detail/event-detail.component';
 
 
 const routes: Routes = [
@@ -30,6 +31,7 @@ const routes: Routes = [
   {path: 'add-rows/:idEvent', component: AddRowsComponent, canActivate: [AuthGuard]},
   {path: 'generate-tickets/:idEvent', component: GenerateTicketsComponent, canActivate: [AuthGuard]},
   {path: 'events', component: EventsComponent, canActivate: [AuthGuard]},
+  {path: 'event-detail/:idEvent', component: EventDetailComponent, canActivate: [AuthGuard]},
   {path: '**', component: NotFoundPageComponent}
 ];
 

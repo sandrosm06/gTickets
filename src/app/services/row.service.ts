@@ -15,9 +15,9 @@ export class RowService{
 		this.url = GLOBAL.url;
 	}
 
-	/*getRows(id:number){
+	getRows(id:number){
 		return this._http.get(this.url+'get-rows/'+id).map(res => res.json());
-	}*/
+	}
 
 	saveRows(rows){
 		//console.log(contactoProveedor);

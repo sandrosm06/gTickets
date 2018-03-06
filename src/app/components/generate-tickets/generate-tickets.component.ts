@@ -4,6 +4,8 @@ import { GenerateService } from '../../services/generate.service';
 import { ExcelService } from '../../services/excel.service';
 import { Configuration } from '../../models/configurations';
 import { Section } from '../../models/section';
+import { EventInformationService } from '../../services/event-information.service';
+
 
 @Component({
   selector: 'app-generate-tickets',
@@ -12,7 +14,9 @@ import { Section } from '../../models/section';
 })
 export class GenerateTicketsComponent implements OnInit {
 
-  public idEvent:number;
+	public idEvent:number;
+	public eventDetail=[];
+
 	public configurationSection=[];
 	public rows=[];
 	public message:string;
@@ -24,13 +28,15 @@ export class GenerateTicketsComponent implements OnInit {
     private _route: ActivatedRoute,
 		private _router: Router,
 		private _generateService: GenerateService,
-		private _excelService: ExcelService
+		private _excelService: ExcelService,
+		private _eventInformationService: EventInformationService
   ) { }
 
   ngOnInit() {
     this.getIdEvent();
-		this.getRows();
-		this.getRowsGenerated();
+	this.getRows();
+	this.getRowsGenerated();
+	this.getEventDetail(this.idEvent);
   }
   getRows(){
 		this._generateService.getRows(this.idEvent).subscribe(
@@ -160,6 +166,23 @@ export class GenerateTicketsComponent implements OnInit {
 			}
 		);
 
+	}
+	getEventDetail(idEvent:number){
+		this._eventInformationService.getEventDetail(idEvent).subscribe(
+			response => {
+				if(response.code == 200){
+					this.eventDetail = response.data;
+					//console.log(this.aforo);
+					//console.log(response.data);
+				}else{
+					this.message="no se ha encontrado informacion de evento";
+					console.log(this.message);
+				}
+			},
+			error => {
+				console.log(<any>error);
+			}
+		);
 	}
 
 }

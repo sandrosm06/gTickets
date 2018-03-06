@@ -1,4 +1,8 @@
 <div class="jumbotron mt-5">
+  <div *ngFor="let event of eventDetail">
+    <h3>Evento: {{event.nameEvent}}</h3>
+  </div>
+  <br class="mt-1" />
   <div *ngFor="let totalSeats of aforo">
   <h3>Aforo Total: {{totalSeats.totalSeats}}</h3>
   </div>

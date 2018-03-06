@@ -65,7 +65,7 @@ export class EventDetailComponent implements OnInit {
         //console.log(response);
 				if(response.code == 200){
 					this.rows = response.data;
-					console.log(this.rows);
+					//console.log(this.rows);
 					//console.log(response.data);
 				}else{
 					//console.log(response );

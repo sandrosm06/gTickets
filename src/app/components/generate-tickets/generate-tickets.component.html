@@ -1,4 +1,9 @@
 <div class="jumbotron mt-5">
+  <h2>Generación de Tickets</h2>
+  <div *ngFor="let event of eventDetail">
+      <h3>Evento: {{event.nameEvent}}</h3>
+    </div>
+  <br class="mt-2"/>
   <table id="entry-grid" datatable="ng" class="table table-hover">
     <thead>
       <tr align="left">

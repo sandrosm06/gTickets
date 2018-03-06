@@ -13,6 +13,7 @@ import * as _ from 'lodash';
 export class AddConfigurationsComponent implements OnInit {
   public title: string;
 	public configurations: Configuration;
+	public eventDetail=[];
 	localidades=[];
 	localidadesSel=[];
 	name:string;
@@ -35,6 +36,7 @@ export class AddConfigurationsComponent implements OnInit {
     this.getIdEvent();
 		this.configurations.events_idEvent=this.idEvent;
 		this.getAforo(this.idEvent);
+		this.getEventDetail(this.idEvent);
 		//this.aforoTotal=this.aforo.totalSeats;
 		console.log(this.aforo);
   }
@@ -109,6 +111,23 @@ export class AddConfigurationsComponent implements OnInit {
 					//console.log(response.data);
 				}else{
 					this.message="no se ha encontrado aforo";
+					console.log(this.message);
+				}
+			},
+			error => {
+				console.log(<any>error);
+			}
+		);
+	}
+	getEventDetail(idEvent:number){
+		this._eventInformationService.getEventDetail(idEvent).subscribe(
+			response => {
+				if(response.code == 200){
+					this.eventDetail = response.data;
+					//console.log(this.aforo);
+					//console.log(response.data);
+				}else{
+					this.message="no se ha encontrado informacion de evento";
 					console.log(this.message);
 				}
 			},

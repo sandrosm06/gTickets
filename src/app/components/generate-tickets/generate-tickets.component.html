@@ -26,7 +26,7 @@
 
           
           <div *ngIf="!isGenerated(row.idRow)">
-            <a (click)="generarTickets(row);" class="btn btn-sm btn-success">Generar Boletos</a>
+            <a (click)="generarTickets(row);" class="btn btn-sm btn-danger">Generar Boletos</a>
           </div>
           
           <div *ngIf="isGenerated(row.idRow)">			    		

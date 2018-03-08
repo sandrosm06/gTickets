@@ -116,7 +116,8 @@ export class AddRowsComponent implements OnInit {
 			//this.cities=[];
 		}
   	}
-
+	  
+	  
   	selectedSection(id:any) {
 		console.log(id);
 		if (id!=null){

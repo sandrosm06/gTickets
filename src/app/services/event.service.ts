@@ -37,6 +37,11 @@ export class EventService{
 		return this._http.post(this.url+'save_event', params, {headers: headers})
 						 .map(res => res.json());
 	}
-
+	isCreatedConfigurations(idEvent:any){
+		return this._http.get(this.url+'isConfiugrationsCreated/'+idEvent).map(res => res.json());
+	}
+	isSectionsCreated(idEvent:any){
+		return this._http.get(this.url+'isSectionsCreated/'+idEvent).map(res => res.json());
+	}
 	
 }

@@ -33,7 +33,7 @@ export class AddConfigurationsComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.getIdEvent();
+    	this.getIdEvent();
 		this.configurations.events_idEvent=this.idEvent;
 		this.getAforo(this.idEvent);
 		this.getEventDetail(this.idEvent);

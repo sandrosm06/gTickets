@@ -17,6 +17,8 @@ export class EventDetailComponent implements OnInit {
   public event=[];
   public rows=[];
   public idGenerated=[];
+  public createdConfigurations:boolean=false;
+  public createdSections:boolean=false;
 
   constructor(
     private _eventService: EventService,
@@ -32,7 +34,8 @@ export class EventDetailComponent implements OnInit {
     this.getVenue();
     this.getRows();
     this.getRowsGenerated();
-
+	this.isCreatedConfigurations();
+	this.isSectionsCreated();
   }
 
   getIdEvent(){
@@ -51,6 +54,43 @@ export class EventDetailComponent implements OnInit {
 					console.log(this.event);
 					//console.log(response.data);
 				}else{
+					//console.log(response );
+				}
+			},
+			error => {
+				console.log(<any>error);
+			});
+  }
+
+  isCreatedConfigurations(){
+    this._eventService.isCreatedConfigurations(this.idEvent).subscribe(
+			response => {
+        //console.log(response);
+				if(response.code == 200){
+					this.createdConfigurations=true;
+					console.log(this.createdConfigurations);
+					//console.log(response.data);
+				}else{
+					this.createdConfigurations=false;
+					console.log(this.createdConfigurations);
+					//console.log(response );
+				}
+			},
+			error => {
+				console.log(<any>error);
+			});
+  }
+  isSectionsCreated(){
+    this._eventService.isSectionsCreated(this.idEvent).subscribe(
+			response => {
+        //console.log(response);
+				if(response.code == 200){
+					this.createdSections=true;
+					console.log(this.createdConfigurations);
+					//console.log(response.data);
+				}else{
+					this.createdConfigurations=false;
+					console.log(this.createdSections);
 					//console.log(response );
 				}
 			},

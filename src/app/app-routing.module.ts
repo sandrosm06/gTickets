@@ -16,6 +16,7 @@ import { AddRowsComponent } from './components/add-rows/add-rows.component';
 import { GenerateTicketsComponent } from './components/generate-tickets/generate-tickets.component';
 import { EventsComponent } from './components/events/events.component';
 import { EventDetailComponent } from './components/event-detail/event-detail.component';
+import { EditConfigurationsComponent } from './components/edit-configurations/edit-configurations.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,7 @@ const routes: Routes = [
   {path: 'add-venue', component: AddVenueComponent, canActivate: [AuthGuard]},
   {path: 'add-event/:idVenue', component: AddEventComponent, canActivate: [AuthGuard]},
   {path: 'add-configurations/:idEvent', component: AddConfigurationsComponent, canActivate: [AuthGuard]},
+  {path: 'edit-configurations/:idEvent', component: EditConfigurationsComponent, canActivate: [AuthGuard]},
   {path: 'add-sections/:idEvent', component: AddSectionComponent, canActivate: [AuthGuard]},
   {path: 'add-rows/:idEvent', component: AddRowsComponent, canActivate: [AuthGuard]},
   {path: 'generate-tickets/:idEvent', component: GenerateTicketsComponent, canActivate: [AuthGuard]},

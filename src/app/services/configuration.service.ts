@@ -28,4 +28,13 @@ export class ConfigurationService{
 		return this._http.post(this.url+'save_configuration', params, {headers: headers})
 						 .map(res => res.json());
 	}
+
+	updateConfiguration(configuration:any){
+		let json = JSON.stringify(configuration);
+		let params = 'json='+json;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+
+		return this._http.post(this.url+'update-configuration', params, {headers: headers})
+						 .map(res => res.json());
+	}
 }

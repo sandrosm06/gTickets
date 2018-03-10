@@ -1,0 +1,41 @@
+<div class="jumbotron mt-5">
+  <h2>Editar Localidades</h2>
+  <div *ngFor="let event of eventDetail">
+      <h3>Evento: {{event.nameEvent}}</h3>
+    </div>
+    <br class="mt-1" />
+    <div *ngFor="let totalSeats of aforo">
+    <h3>Aforo Total: {{totalSeats.totalSeats}}</h3>
+    <h3>Aforo Configurado: {{aforoTotal}}</h3>
+    </div>
+  <div class="card border-primary mb-3">
+      <table id="entry-grid" datatable="ng" class="table table-hover">
+          <thead>
+            <tr>
+              <!--th style="width: 1%" class="text-center">No.</th-->
+              <th>Localidad</th>
+              <th>Número de Asistentes</th>
+              <th>Acciones</th>
+              <!--th></th-->
+            </tr>
+          </thead>
+          <tbody>
+            <tr align="left" *ngFor="let configuration of configurations">
+              <td><input type="text" class="editable-cell" [(ngModel)]="configuration.name" /></td>
+              <td><input type="text" class="editable-cell" [(ngModel)]="configuration.seatsNumber" name="seats-{{configuration.idConfiguration}}"  (input)="totalAforo()" /></td>
+              <td>
+                <button type="button"  class="btn btn-outline-success" (click)="updateConfiguration(configuration);"  ><i class="fa fa-save"> <strong>Actualizar</strong> </i></button>
+                <button type="button"  class="btn btn-outline-danger" (click)="deleteConfiguration(configuration);"  ><i class="fa fa-minus-circle"> <strong>Eliminar</strong> </i></button>
+                <!--div class="botones" *ngIf="confirmado != configuration.idConfiguration">
+                  <a (click)="borrarConfirm(configuration);" class="btn btn-sm btn-danger">X</a>
+                </div>
+                <div class="botones" *ngIf="confirmado== configuration.idConfiguration">
+                  <a (click)="onDeleteConfiguration(configuration);" class="btn btn-sm btn-danger">Quiero eliminarlo</a>
+                  <a (click)="cancelarConfirm();" class="btn btn-sm btn-warning">Cancelar</a>
+                </div-->
+              </td>
+            </tr>     
+          </tbody>
+        </table>
+  </div>
+</div>

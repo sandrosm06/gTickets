@@ -40,6 +40,7 @@ import { AddRowsComponent } from './components/add-rows/add-rows.component';
 import { GenerateTicketsComponent } from './components/generate-tickets/generate-tickets.component';
 import { EventsComponent } from './components/events/events.component';
 import { EventDetailComponent } from './components/event-detail/event-detail.component';
+import { EditConfigurationsComponent } from './components/edit-configurations/edit-configurations.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { EventDetailComponent } from './components/event-detail/event-detail.com
     AddRowsComponent,
     GenerateTicketsComponent,
     EventsComponent,
-    EventDetailComponent
+    EventDetailComponent,
+    EditConfigurationsComponent
   ],
   imports: [
     BrowserModule,

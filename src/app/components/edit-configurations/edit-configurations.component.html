@@ -25,7 +25,7 @@
               <td><input type="text" class="editable-cell" [(ngModel)]="configuration.seatsNumber" name="seats-{{configuration.idConfiguration}}"  (input)="totalAforo()" /></td>
               <td>
                 <button type="button"  class="btn btn-outline-success" (click)="updateConfiguration(configuration);"  ><i class="fa fa-save"> <strong>Actualizar</strong> </i></button>
-                <button type="button"  class="btn btn-outline-danger" (click)="deleteConfiguration(configuration);"  ><i class="fa fa-minus-circle"> <strong>Eliminar</strong> </i></button>
+                <button type="button"  class="btn btn-outline-danger"  (click)="deleteConfiguration(configuration);"  ><i class="fa fa-minus-circle"> <strong>Eliminar</strong> </i></button>
                 <!--div class="botones" *ngIf="confirmado != configuration.idConfiguration">
                   <a (click)="borrarConfirm(configuration);" class="btn btn-sm btn-danger">X</a>
                 </div>

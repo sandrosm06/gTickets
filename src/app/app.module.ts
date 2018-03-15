@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -41,6 +43,7 @@ import { GenerateTicketsComponent } from './components/generate-tickets/generate
 import { EventsComponent } from './components/events/events.component';
 import { EventDetailComponent } from './components/event-detail/event-detail.component';
 import { EditConfigurationsComponent } from './components/edit-configurations/edit-configurations.component';
+import { ModalChangeGenerateTicketsComponent } from './components/modal-change-generate-tickets/modal-change-generate-tickets.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +64,8 @@ import { EditConfigurationsComponent } from './components/edit-configurations/ed
     GenerateTicketsComponent,
     EventsComponent,
     EventDetailComponent,
-    EditConfigurationsComponent
+    EditConfigurationsComponent,
+    ModalChangeGenerateTicketsComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +75,8 @@ import { EditConfigurationsComponent } from './components/edit-configurations/ed
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     FlashMessagesModule,
-    NgSelectModule
+    NgSelectModule,
+    NgbModule.forRoot()
   ],
   providers: [
     AuthService,

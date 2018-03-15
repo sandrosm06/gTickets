@@ -128,7 +128,10 @@ export class EditConfigurationsComponent implements OnInit {
       }
   }
   deleteConfiguration(configuration:any){
-    console.log(configuration);
+    //console.log(configuration);
+    if(confirm("¿Esta seguro que desea eliminar la Localidad "+configuration.name + "?" )) {
+      console.log("Implement delete functionality here");
+    }
   }
 
   totalAforo(){

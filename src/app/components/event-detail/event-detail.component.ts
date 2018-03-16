@@ -10,6 +10,8 @@ import { Configuration } from '../../models/configurations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalChangeGenerateTicketsComponent } from '../modal-change-generate-tickets/modal-change-generate-tickets.component';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {ChangeDetectorRef} from '@angular/core';
+
 
 
 
@@ -40,7 +42,7 @@ export class EventDetailComponent implements OnInit {
 	public aforoTotal:number=0;
 	public aforoLocalidades:number=0;
 	public isSeatsOk:boolean=true;
-	public isSeatsGenerated:boolean=false;
+	//public isSeatsGenerated:boolean=false;
 	public totalSeats=[];
 
 	public modal:ModalChangeGenerateTicketsComponent;
@@ -55,7 +57,8 @@ export class EventDetailComponent implements OnInit {
 		private _sectionService: SectionService,
 		private _excelService: ExcelService,
 		private _flashMessage: FlashMessagesService,
-		private _modalService: NgbModal
+		private _modalService: NgbModal,
+		private _cd: ChangeDetectorRef
 
   ) {
 			//this.configurations = new Configuration(0,'','',0);
@@ -125,13 +128,30 @@ export class EventDetailComponent implements OnInit {
 	
   saveEventDetail(edit:boolean, venue:any){
 		this.editDetails=edit;
-		//console.log(venue);
+		console.log(venue);
 		//if(this.isSeatsOk){
+			this._eventService.deleteTickets(venue.idRow).subscribe(
+				response => {
+					if(response.code == 200){
+						this._flashMessage.show(response.message, {cssClass: 'alert-danger', timeout: 4000});
+						
+					}else{
+						this._flashMessage.show(response.message, {cssClass: 'alert-danger', timeout: 4000});
+					}
+				},
+				error =>{
+					console.log(<any>error);
+				}
+			);
+			
+			
 			this._eventService.onUpdateDetail(venue).subscribe(
 				response => {
 					//console.log(response);
 					if(response.code == 200){
 						this._flashMessage.show(response.message, {cssClass: 'alert-danger', timeout: 4000});
+						venue.isTicketsGenerated=0;
+						console.log(venue);
 					}else{
 						//console.log(response );
 						this._flashMessage.show(response.message, {cssClass: 'alert-danger', timeout: 4000});
@@ -143,7 +163,12 @@ export class EventDetailComponent implements OnInit {
 		/*}else{
 			this._flashMessage.show('No se puede actualizar los registros, verifique el Aforo', {cssClass: 'alert-danger', timeout: 4000});
 		}*/
+		//this.getRows();
+		this._cd.detectChanges();
+
 		this.cancelEventDetail(false);
+		
+		//console.log("sale");
   }
 
   getVenue(){
@@ -201,6 +226,7 @@ export class EventDetailComponent implements OnInit {
   }
 
   getRows(){
+		console.log("entra");
     this._rowService.getRows(this.idEvent).subscribe(
 			response => {
         //console.log(response);
@@ -225,6 +251,7 @@ export class EventDetailComponent implements OnInit {
 					//this._router.navigate(['/add-sections/'+this.idEvent]);
 					//this.isGenerated=true;
 					this.idGenerated.push(row.idRow);
+					row.isTicketsGenerated=1;
 					console.log(this.idGenerated);
 					//console.log(response);
 					//this.isGenerated(row.idRow);

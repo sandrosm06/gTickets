@@ -173,8 +173,8 @@
           <td>{{row.rowName}}</td>
           <td>{{row.seatsPerRow}} - {{row.isSeatsOK}}</td>
           <td>
-            
-              <div *ngIf="!isGenerated(row.idRow);else noGenerate">
+              <!--div *ngIf="!isGenerated(row.idRow);else noGenerate"-->
+              <div *ngIf="row.isTicketsGenerated == 0;else noGenerate">
                   <a class="btn btn-outline-warning" (click)="editDetail(true, e)"><i class="fa fa-edit"></i></a> | 
                   <a class="btn btn-outline-danger" (click)="generarTickets(row);"><i class="fa fa-minus-circle"> Generar tickets</i></a>
               </div>
@@ -197,15 +197,16 @@
               <td><input type="text" class="form-control form-control-sm" [(ngModel)]="row.rowName" ></td>
               <td><input type="text" class="form-control form-control-sm" [(ngModel)]="row.seatsPerRow" (input)="seatsPerRow(row)" ></td>
               <td>
-                <div *ngIf="!isGenerated(row.idRow);else noGenerateT">
+                <!--div *ngIf="!isGenerated(row.idRow);else noGenerateT"-->
+                <div *ngIf="row.isTicketsGenerated == 0;else noGenerateT">
                   <div *ngIf="row.isSeatsOK;else noSeatsOk">
-                      seatOk {{row.isSeatsOK}}<a class="btn btn-outline-success" (click)="saveEventDetail(false, row);"><i class="fa fa-save"></i></a> | 
+                      <a class="btn btn-outline-success" (click)="saveEventDetail(false, row);"><i class="fa fa-save"></i></a> | 
                       <a class="btn btn-outline-success" (click)="generarTickets(row);"><i class="fa fa-minus-circle"> Generar tickets</i></a>
                       |<a class="btn btn-outline-primary" (click)="cancelEventDetail(false)"><i class="fa fa-ban"></i></a>
                   
                   </div>
                   <ng-template #noSeatsOk>
-                     noSeat {{row.isSeatsOK}}<a class="btn btn-outline-success disabled" (click)="saveEventDetail(false, row);"><i class="fa fa-save"></i></a> | 
+                     <a class="btn btn-outline-success disabled" (click)="saveEventDetail(false, row);"><i class="fa fa-save"></i></a> | 
                     <a class="btn btn-outline-success" (click)="generarTickets(row);"><i class="fa fa-minus-circle"> Generar tickets</i></a>
                     |<a class="btn btn-outline-primary" (click)="cancelEventDetail(false)"><i class="fa fa-ban"></i></a>
                   
@@ -213,14 +214,13 @@
                 </div>
                 <ng-template #noGenerateT>
                     <div *ngIf="row.isSeatsOK;else noSeatsOkNT">
-                      noG Borrar - {{row.isSeatsOK}}
                       <a class="btn btn-outline-success" (click)="open(MensajeBorrar);"><i class="fa fa-save"></i></a>
                       <!--a class="btn btn-outline-success" (click)="saveEventDetail(false, row);"><i class="fa fa-save"></i></a--> | 
                       <a class="btn btn-outline-success" (click)="generarArchivo(row.idRow);" ><i class="fa fa-download"></i></a>
                       |<a class="btn btn-outline-primary" (click)="cancelEventDetail(false)"><i class="fa fa-ban"></i></a>
                     </div> 
                     <ng-template #noSeatsOkNT>
-                        noG - Borrar Tickets {{row.isSeatsOK}}<a class="btn btn-outline-success disabled" (click)="saveEventDetail(false, row);"><i class="fa fa-save"></i></a> | 
+                        <a class="btn btn-outline-success disabled" (click)="saveEventDetail(false, row);"><i class="fa fa-save"></i></a> | 
                         <a class="btn btn-outline-success" (click)="generarArchivo(row.idRow);" ><i class="fa fa-download"></i></a>
                        |<a class="btn btn-outline-primary" (click)="cancelEventDetail(false)"><i class="fa fa-ban"></i></a>
                      

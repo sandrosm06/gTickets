@@ -3,7 +3,7 @@
   
     <form #formAddSection="ngForm" (ngSubmit)="onSubmit()" id="form-add-section" class="col-lg-6">
       <div class="form-group">
-        <label>Configuraciones</label>
+        <label>Localidad</label>
         <ng-select [items]="configurations"
                    bindLabel="name"
                    bindValue="idConfiguration"
@@ -36,11 +36,14 @@
         <tbody>
           <tr align="left" *ngFor="let section of sectionsConf">
             <td>{{section.localidad}}</td>
-            <td>{{section.name}}</td>
+            <td>{{section.sectionName}}</td>
             <td>
-              <div class="botones" *ngIf="confirmado== section.idSection">
-                <a (click)="onDeleteSection(section);" class="btn btn-sm btn-danger">Quiero eliminarlo</a>
+              <div class="botones" *ngIf="section.idSection;else noId">
+                  <a class="btn btn-outline-danger" (click)="onDeleteSection(section);"><i class="fa fa-minus-circle"></i></a>
               </div>
+              <ng-template #noId>
+                  <a (click)="onDeleteSection(section);" class="btn btn-sm btn-danger">Quiero eliminarlo</a>
+              </ng-template>
             </td>
           </tr>     
         </tbody>

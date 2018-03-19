@@ -33,12 +33,12 @@
       <tbody>
         <tr align="left" *ngFor="let configuration of localidades">
           <td>{{configuration.name}}</td>
-          <td>{{configuration.seats}}</td>
+          <td>{{configuration.seatsNumber}}</td>
           <td>
             <div class="botones" *ngIf="confirmado != configuration.idConfiguration">
               <a (click)="borrarConfirm(configuration);" class="btn btn-sm btn-danger">X</a>
             </div>
-            <div class="botones" *ngIf="confirmado== configuration.idConfiguration">
+            <div class="botones" *ngIf="confirmado == configuration.idConfiguration">
               <a (click)="onDeleteConfiguration(configuration);" class="btn btn-sm btn-danger">Quiero eliminarlo</a>
               <a (click)="cancelarConfirm();" class="btn btn-sm btn-warning">Cancelar</a>
             </div>

@@ -37,6 +37,7 @@ export class AddConfigurationsComponent implements OnInit {
 		this.configurations.events_idEvent=this.idEvent;
 		this.getAforo(this.idEvent);
 		this.getEventDetail(this.idEvent);
+		this.getConfigurations(this.idEvent);
 		//this.aforoTotal=this.aforo.totalSeats;
 		console.log(this.aforo);
   }
@@ -47,20 +48,20 @@ export class AddConfigurationsComponent implements OnInit {
 	}
 
 	addConfigurationTable(nameConfig:string, seatsNumber){
-		this.localidades.push({"name":nameConfig, "seats":seatsNumber, "idEvent":this.idEvent});
+		//this.localidades.push({"name":nameConfig, "seats":seatsNumber, "idEvent":this.idEvent});
+		this.localidades.push({"idConfiguration":0, "name":nameConfig, "seatsNumber":seatsNumber, "events_idEvent":this.idEvent});
 		//console.log(this.localidades);
 		var newJsonFile = _.uniqBy(this.localidades, 'name');
 		this.localidades = newJsonFile;
-
 		//console.log(this.localidades.length);
-		this.totalAforo();
-		
+		this.totalAforo();	
 	}
 	totalAforo(){
 		this.aforoTotal=0;
 		for(var i=0; i<this.localidades.length; i++){
 			//console.log(this.localidades[i].seats);
-			this.aforoTotal = this.aforoTotal + parseInt(this.localidades[i].seats);
+			//this.aforoTotal = this.aforoTotal + parseInt(this.localidades[i].seats);
+			this.aforoTotal = this.aforoTotal + parseInt(this.localidades[i].seatsNumber);
 		}
 		//console.log(this.aforoTotal);
 	}
@@ -135,6 +136,27 @@ export class AddConfigurationsComponent implements OnInit {
 				console.log(<any>error);
 			}
 		);
+	}
+
+	getConfigurations(idEvent:number){
+		this._configurationService.getConfigurations(idEvent).subscribe(
+			response => {
+				if(response.code == 200){
+					this.localidades = response.data;
+					this.totalAforo();
+					console.log(this.localidades);
+					//console.log(response.data);
+				}else{
+					this.message="no se ha encontrado aforo";
+					console.log(this.message);
+				}
+			},
+			error => {
+				console.log(<any>error);
+			}
+		);
+		
+
 	}
 
 }

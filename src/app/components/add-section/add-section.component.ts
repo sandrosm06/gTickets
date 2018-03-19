@@ -17,7 +17,7 @@ export class AddSectionComponent implements OnInit {
 	public idEvent:number;
 	public idConfiguration:number;
 	sectionsConf=[];
-	public name:string;
+	//public name:string;
 	public localidad:string;
   public message:string;
   
@@ -33,11 +33,13 @@ export class AddSectionComponent implements OnInit {
   ngOnInit() {
     this.getIdEvent();
 		this.getConfigurations(this.idEvent);
+		this.getSections();
   }
   onSubmit(){
 		console.log("Submit");
 		this.saveSection();
 		//this._router.navigate(['/configurations');
+		
 	}
 
 	saveSection(){
@@ -67,7 +69,7 @@ export class AddSectionComponent implements OnInit {
 					this.configurations = response.data;
 					console.log(this.configurations);
 				}else{
-					this.message="no se ha encontrado configuraciones";
+					this.message="no se ha encontrado Localidades";
 					console.log(this.message);
 				}
 			},
@@ -85,18 +87,20 @@ export class AddSectionComponent implements OnInit {
 	}
 
 	selected(id:any) {
+
 		console.log(id);
 		if (id!=null){
 		    this.idConfiguration = id.idConfiguration;
-		    this.localidad = id.name;
+			this.localidad = id.name;
+			//this.getSections(this.idConfiguration);
 		}else{
 			//this.cities=[];
 		}
   	}
 
   	addSectionTable(nameSection: string){
-  		console.log(name);
-  		this.sectionsConf.push({"localidad":this.localidad, "name":nameSection, "idConfiguration":this.idConfiguration});
+  		console.log(nameSection);
+  		this.sectionsConf.push({"idSection":0,"localidad":this.localidad, "sectionName":nameSection, "idConfiguration":this.idConfiguration});
 		console.log(this.sectionsConf);
 		//var newJsonFile = _.uniqBy(this.sectionsConf, 'name');
 		//this.sectionsConf = newJsonFile;
@@ -108,6 +112,23 @@ export class AddSectionComponent implements OnInit {
 		//console.log(indice);
 		this.sectionsConf.splice(indice,1);
 		//this.totalAforo();
+	}
+
+	getSections(){
+		this._sectionService.getSectionsEvent(this.idEvent).subscribe(
+			response => {
+				if(response.code == 200){
+					this.sectionsConf = response.data;
+					console.log(this.sectionsConf);
+				}else{
+					this.message="no se ha encontrado configuraciones";
+					console.log(this.message);
+				}
+			},
+			error => {
+				console.log(<any>error);
+			}
+		);
 	}
 
 }

@@ -19,7 +19,9 @@ export class SectionService{
 	getSections(id:number){
 		return this._http.get(this.url+'get-sections/'+id).map(res => res.json());
 	}
-
+	getSectionsEvent(id:number){
+		return this._http.get(this.url+'get-sections-event/'+id).map(res => res.json());
+	}
 	saveSection(section){
 		//console.log(contactoProveedor);
 		let json = JSON.stringify(section);

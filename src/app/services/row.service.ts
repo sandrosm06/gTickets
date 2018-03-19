@@ -18,6 +18,9 @@ export class RowService{
 	getRows(id:number){
 		return this._http.get(this.url+'get-rows/'+id).map(res => res.json());
 	}
+	deleteRow(idRow:number){
+		return this._http.get(this.url+'delete-row/'+idRow).map(res => res.json());
+	}
 
 	saveRows(rows){
 		//console.log(contactoProveedor);
@@ -27,5 +30,9 @@ export class RowService{
 
 		return this._http.post(this.url+'save_rows', params, {headers: headers})
 						 .map(res => res.json());
+	}
+
+	deleteTickets(idRow){
+		return this._http.get(this.url+'delete-tickets/'+idRow).map(res => res.json());
 	}
 }

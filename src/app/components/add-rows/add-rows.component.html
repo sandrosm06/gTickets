@@ -64,15 +64,38 @@
       <tbody>
         <tr align="left" *ngFor="let row of rows">
           <td>{{row.localidad}}</td>
-          <td>{{row.seccion}}</td>
-          <td>{{row.name}}</td>
-          <td>{{row.seats}}</td>
+          <td>{{row.sectionName}}</td>
+          <td>{{row.rowName}}</td>
+          <td>{{row.seatsPerRow}}</td>
           <td>
             
-            <div class="botones" *ngIf="confirmado== row.idRow">
-              <a (click)="onDeleteRow(row);" class="btn btn-sm btn-danger">Quiero eliminarlo</a>
-            </div>
+              <div class="botones" *ngIf="row.idRow != 0;else noId">
+                  <a class="btn btn-outline-danger" (click)="open(delRow);c('Close click')"><i class="fa fa-minus-circle"></i></a>
+              </div>
+              <ng-template #noId>
+                  <a (click)="onDeleteRow(row);" class="btn btn-sm btn-danger">Quiero eliminarlo</a>
+              </ng-template>
+              
+              <ng-template #delRow let-c="close" let-d="dismiss">
+                  <div class="modal-header">
+                      <h4 class="modal-title">Atención</h4>
+                      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p>Al realizar esta acción se eliminará los tickets generados para esta fila!&hellip;</p>
+                      <p>¿Desea continuar con esta acción?</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline-dark" (click)="deleteRow(row);" >Eliminar</button>
+                      <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+                    </div>
+              </ng-template>
+              
+
           </td>
+          
         </tr>     
       </tbody>
     </table>

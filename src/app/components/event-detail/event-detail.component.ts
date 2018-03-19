@@ -27,12 +27,12 @@ export class EventDetailComponent implements OnInit {
 	public configurations=[];
 	public config=[];
 	public sections=[];
-  public rows=[];
-  public idGenerated=[];
-  public createdConfigurations:boolean=false;
-  public createdSections:boolean=false;
-  public editVenue:boolean=false;
-  public editDate:boolean=false; 
+	public rows=[];
+	public idGenerated=[];
+	public createdConfigurations:boolean=false;
+	public createdSections:boolean=false;
+	public editVenue:boolean=false;
+	public editDate:boolean=false; 
 	public editDetails:boolean=false;
 
 	public editConfigurations:boolean=false;
@@ -56,12 +56,12 @@ export class EventDetailComponent implements OnInit {
     private _route: ActivatedRoute,
     private _router: Router,
     private _rowService: RowService,
-		private _generateService: GenerateService,
-		private _sectionService: SectionService,
-		private _excelService: ExcelService,
-		private _flashMessage: FlashMessagesService,
-		private _modalService: NgbModal,
-		private _cd: ChangeDetectorRef
+	private _generateService: GenerateService,
+	private _sectionService: SectionService,
+	private _excelService: ExcelService,
+	private _flashMessage: FlashMessagesService,
+	private _modalService: NgbModal,
+	private _cd: ChangeDetectorRef
 
   ) {
 			//this.configurations = new Configuration(0,'','',0);
@@ -239,7 +239,7 @@ export class EventDetailComponent implements OnInit {
         //console.log(response);
 				if(response.code == 200){
 					this.rows = response.data;
-					//console.log(this.rows);
+					console.log(this.rows);
 					//console.log(response.data);
 				}else{
 					//console.log(response );
@@ -549,13 +549,22 @@ export class EventDetailComponent implements OnInit {
 	}
 
   private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return  `with: ${reason}`;
-    }
-  }
+	  if (reason === ModalDismissReasons.ESC) {
+		  return 'by pressing ESC';
+		} else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+			return 'by clicking on a backdrop';
+		} else {
+			return  `with: ${reason}`;
+		}
+	}
+
+	agregarLocalidades(){
+		this._router.navigate(['/add-configurations/'+this.idEvent]);
+
+	}
+	agregarSecciones(){
+		this._router.navigate(['/add-sections/'+this.idEvent]);
+		
+	}
 
 }

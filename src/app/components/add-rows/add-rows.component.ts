@@ -6,6 +6,8 @@ import { RowService } from '../../services/row.service';
 import { EventInformationService } from '../../services/event-information.service';
 import { Configuration } from '../../models/configurations';
 import { Section } from '../../models/section';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-add-rows',
@@ -29,7 +31,10 @@ export class AddRowsComponent implements OnInit {
 	public aforoSeccion:number=0;
 	public generate=false;
 	public message:string;
-  public asistentes:number=0;
+	public asistentes:number=0;
+	closeResult: string;
+
+
   
   constructor(
     private _route: ActivatedRoute,
@@ -37,13 +42,16 @@ export class AddRowsComponent implements OnInit {
 		private _configurationService: ConfigurationService,
 		private _sectionService: SectionService,
 		private _rowService:RowService,
-		private _eventInformationService: EventInformationService
+		private _eventInformationService: EventInformationService,
+		private _modalService: NgbModal,
+
   ) { }
 
   ngOnInit() {
     this.getIdEvent();
 		this.getConfigurations(this.idEvent);
 		this.getAforo(this.idEvent);
+		this.getRows(this.idEvent);
   }
   onSubmit(){
 		console.log("Submit");
@@ -137,19 +145,37 @@ export class AddRowsComponent implements OnInit {
 
 	addRowTable(nameRow:string, seatsNumber:string){
 		console.log(name);
-  		this.rows.push({"localidad":this.localidad, "seccion":this.sectionName, "name":nameRow, "seats":seatsNumber, "idSection": this.idSection});
+  		this.rows.push({"idRow":0, "localidad":this.localidad, "sectionName":this.sectionName, "rowName":nameRow, "seatsPerRow":seatsNumber, "idSection": this.idSection});
 		console.log(this.rows);
 		//var newJsonFile = _.uniqBy(this.rows, 'name');
 		//this.rows = newJsonFile;
 		this.totalAforo();
 	}
-
+	deleteRow(row:any){
+		console.log(row);
+		this._rowService.deleteRow(row.idRow).subscribe(
+			response => {
+				if(response.code == 200){
+					//this.aforo = response.data;
+					console.log(response.message);
+					//console.log(this.aforo);
+					//console.log(response.data);
+				}else{
+					this.message="no se ha eliminado la fila";
+					console.log(this.message);
+				}
+			},
+			error => {
+				console.log(<any>error);
+			});
+		
+	}
 	totalAforo(){
 		this.aforoTotal=0;
 		//console.log(this.rows);
 		for(var i=0; i<this.rows.length; i++){
 			//if(this.idSection=)
-			this.aforoTotal = this.aforoTotal + parseInt(this.rows[i].seats);
+			this.aforoTotal = this.aforoTotal + parseInt(this.rows[i].seatsPerRow);
 		}
 		console.log(this.aforoTotal);
 		
@@ -157,7 +183,7 @@ export class AddRowsComponent implements OnInit {
 		//console.log(this.rows);
 		for(var i=0; i<this.rows.length; i++){
 			if(this.idSection==this.rows[i].idSection){
-				this.aforoSeccion = this.aforoSeccion + parseInt(this.rows[i].seats);
+				this.aforoSeccion = this.aforoSeccion + parseInt(this.rows[i].seatsPerRow);
 			}
 		}
 		console.log(this.aforoSeccion);
@@ -191,6 +217,41 @@ export class AddRowsComponent implements OnInit {
 		//console.log(indice);
 		this.rows.splice(indice,1);
 		this.totalAforo();
+	}
+
+	getRows(id:number){
+		this._rowService.getRows(id).subscribe(
+			response => {
+				if(response.code == 200){
+					this.rows = response.data;
+					console.log(this.rows);
+					//console.log(response.data);
+				}else{
+					this.message="no se ha encontrado aforo";
+					console.log(this.message);
+				}
+			},
+			error => {
+				console.log(<any>error);
+			}
+		);
+	}
+
+	open(content) {
+		this._modalService.open(content).result.then((result) => {
+				this.closeResult = `Closed with: ${result}`;
+		}, (reason) => {
+		  this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+		});
+	}
+	private getDismissReason(reason: any): string {
+		if (reason === ModalDismissReasons.ESC) {
+			return 'by pressing ESC';
+		} else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+			return 'by clicking on a backdrop';
+		} else {
+			return  `with: ${reason}`;
+		}
 	}
 
 }

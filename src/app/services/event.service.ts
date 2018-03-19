@@ -48,6 +48,10 @@ export class EventService{
 		return this._http.get(this.url+'delete-tickets/'+idRow).map(res => res.json());
 	}
 
+	deleteRow(idRow:any){
+		return this._http.get(this.url+'delete-row/'+idRow).map(res => res.json());
+	}
+
 	onUpdateDetail(row:any){
 		console.log(row);
 		let json = JSON.stringify(row);

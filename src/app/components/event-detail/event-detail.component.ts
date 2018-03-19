@@ -25,6 +25,7 @@ export class EventDetailComponent implements OnInit {
   public idEvent:number;
 	public event=[];
 	public configurations=[];
+	public config=[];
 	public sections=[];
   public rows=[];
   public idGenerated=[];
@@ -39,6 +40,8 @@ export class EventDetailComponent implements OnInit {
 
 
 	public aforo=[];
+	public suma:number=0;
+	public sumaAforoRow:number=0;
 	public aforoTotal:number=0;
 	public aforoLocalidades:number=0;
 	public isSeatsOk:boolean=true;
@@ -62,26 +65,30 @@ export class EventDetailComponent implements OnInit {
 
   ) {
 			//this.configurations = new Configuration(0,'','',0);
+
 	 }
 
   ngOnInit() {
+		this.iniciar();
+  }
+
+	private iniciar() {
 		this.getIdEvent();
 		//this.getSections();
-    this.getVenue();
-    this.getRows();
-    this.getRowsGenerated();
+		this.getVenue();
+		this.getRows();
+		this.getRowsGenerated();
 		this.isCreatedConfigurations();
 		this.isSectionsCreated();
-		
 		this.getConfigurations();
 		this.getSectionsEvents();
-
+		this.getSumSeats();
 		//this.totalAforo();
 		//this.getSumRows();
 		//this.getSumConfigurations();
 		//this.getSumSeats();
-
-  }
+		console.log(this.config);
+	}
 
   getIdEvent(){
 		this._route.params.forEach((params: Params) => {
@@ -90,8 +97,8 @@ export class EventDetailComponent implements OnInit {
 		});
   }
   editEventName(edit:boolean){
-	this.editVenue=edit;
-	console.log(edit);
+		this.editVenue=edit;
+		console.log(edit);
   }
   
   updateEventDetail(edit:boolean, event:any){
@@ -112,8 +119,8 @@ export class EventDetailComponent implements OnInit {
   }
 
   editEventDate(edit:boolean){
-	this.editDate=edit;
-	console.log(edit);
+		this.editDate = edit;
+		console.log(edit);
   }
   
   saveEventDate(edit:boolean, venue:any){
@@ -122,8 +129,8 @@ export class EventDetailComponent implements OnInit {
   }
 
   editDetail(edit:boolean, venue:any){
-	this.editDetails=edit;
-	console.log(edit);
+		this.editDetails=edit;
+		console.log(edit);
 	}
 	
   saveEventDetail(edit:boolean, venue:any){
@@ -186,6 +193,7 @@ export class EventDetailComponent implements OnInit {
 			error => {
 				console.log(<any>error);
 			});
+			//console.log(this.event.length);
   }
 
   isCreatedConfigurations(){
@@ -226,13 +234,12 @@ export class EventDetailComponent implements OnInit {
   }
 
   getRows(){
-		console.log("entra");
     this._rowService.getRows(this.idEvent).subscribe(
 			response => {
         //console.log(response);
 				if(response.code == 200){
 					this.rows = response.data;
-					console.log(this.rows);
+					//console.log(this.rows);
 					//console.log(response.data);
 				}else{
 					//console.log(response );
@@ -361,11 +368,13 @@ export class EventDetailComponent implements OnInit {
 	
 
 	getConfigurations(){
+		console.log("configuraciones");
     this._eventService.getConfigurations(this.idEvent).subscribe(
 			response => {
         //console.log(response);
 				if(response.code == 200){
 					this.configurations = response.data;
+					this.config = this.configurations;
 					console.log(this.configurations);
 					//this.getSections();
 
@@ -396,33 +405,44 @@ export class EventDetailComponent implements OnInit {
 	}
 
 	getSumSeats(){
-		this._eventService.getSumSeats(this.idEvent).subscribe(
-			response => {
-				if(response.code == 200){
-					this.totalSeats = response.data;
-					//console.log(response.data);
-				}else{
-					//console.log(response );
-				}
-			},
-			error => {
-				console.log(<any>error);
-			});
+		this.suma=0;
+		//console.log("Entra a sumar " + this.configurations.length);
+		for(let i = 0; i < this.configurations.length; i++){
+			//console.log(this.configurations[i].seatsNumber);
+			//console.log(this.config);
+			this.suma=this.suma+parseInt(this.configurations[i].seatsNumber);
+		}
+		return(this.suma);
 	}
 
 	getSumRows(){
-		this._eventService.getSumRows(this.idEvent).subscribe(
+		this.sumaAforoRow=0;
+		for(let i = 0; i < this.rows.length; i++){
+			this.sumaAforoRow = this.sumaAforoRow + parseInt(this.rows[i].seatsPerRow);
+		}
+		return(this.sumaAforoRow);
+	}
+	
+	getRows2(){
+		let config2=[];
+		
+		this._eventService.getConfigurations(this.idEvent).subscribe(
 			response => {
+				console.log(this.idEvent);
+        //console.log(response);
 				if(response.code == 200){
-					this.aforoTotal = response.data;
-					//console.log(response.data);
+					this.config = response.data;
+					console.log(config2);
+					//this.getSections();
+
 				}else{
-					//console.log(response );
+					console.log(response.message );
 				}
 			},
 			error => {
 				console.log(<any>error);
 			});
+			//return (config2);
 	}
 	getSumConfigurations(){
 		this._eventService.getSumConfigurations(this.idEvent).subscribe(
@@ -461,8 +481,7 @@ export class EventDetailComponent implements OnInit {
 	cancelEventDetail(edit:boolean){
 		this.editDetails=edit;
 	}
-	updateConfiguration (edit:boolean, config:any)
-	{
+	updateConfiguration (edit:boolean, config:any){
 			this.editConfigurations=edit;
 		console.log(config);
 		this._eventService.updateConfigurations(config).subscribe(
@@ -481,8 +500,7 @@ export class EventDetailComponent implements OnInit {
 
 			this.ngOnInit();
 	}
-	updateSection (edit:boolean, sect:any)
-	{
+	updateSection (edit:boolean, sect:any){
 		this.editSections=edit;
 		console.log(sect);
 		this._eventService.updateSections(sect).subscribe(
@@ -504,11 +522,31 @@ export class EventDetailComponent implements OnInit {
 
 	open(content) {
     this._modalService.open(content).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
+			this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
-  }
+	}
+	
+	eliminarRow(row:any){
+		console.log(row);
+
+		this._eventService.deleteRow(row.idRow).subscribe(
+			response => {
+				if(response.code == 200){
+					this._flashMessage.show(response.message, {cssClass: 'alert-danger', timeout: 4000});
+					this.iniciar();
+				}else{
+					this._flashMessage.show(response.message, {cssClass: 'alert-danger', timeout: 4000});
+				}
+			},
+			error =>{
+				console.log(<any>error);
+			}
+		);
+		
+		
+	}
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {

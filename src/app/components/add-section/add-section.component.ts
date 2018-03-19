@@ -152,9 +152,7 @@ export class AddSectionComponent implements OnInit {
 			}
 		);
 	}
-	borrarConfirm(sect:any){
-		console.log(sect);
-	}
+	
 
 	open(content) {
 		this._modalService.open(content).result.then((result) => {

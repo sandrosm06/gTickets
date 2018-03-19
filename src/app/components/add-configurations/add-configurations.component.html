@@ -37,7 +37,7 @@
           <td>
             <div class="botones" *ngIf="configuration.idConfiguration != 0; else noId">
               <!--a (click)="borrarConfirm(configuration);" class="btn btn-sm btn-danger">X</a-->
-              <a class="btn btn-outline-danger" (click)="open(DelConfiguration);c('Close click')"><i class="fa fa-minus-circle"></i></a>
+              <a class="btn btn-outline-danger" (click)="open(DelConfiguration);"><i class="fa fa-minus-circle"></i></a>
 
             </div>
             <ng-template #noId>

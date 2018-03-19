@@ -189,12 +189,12 @@
               <!--div *ngIf="!isGenerated(row.idRow);else noGenerate"-->
               <div *ngIf="row.isTicketsGenerated == 0;else noGenerate">
                   <a class="btn btn-outline-warning" (click)="editDetail(true, e)"><i class="fa fa-edit"></i></a> | 
-                  <a class="btn btn-outline-danger" (click)="open(EliminarFila);c('Close click')"><i class="fa fa-minus-circle"></i></a> |
+                  <a class="btn btn-outline-danger" (click)="open(EliminarFila);"><i class="fa fa-minus-circle"></i></a> |
                   <a class="btn btn-outline-danger" (click)="generarTickets(row);"><i class="fa fa-minus-cirwcle"> Generar tickets</i></a>
               </div>
               <ng-template #noGenerate>
                   <a class="btn btn-outline-warning" (click)="editDetail(true, e)"><i class="fa fa-edit"></i></a> | 
-                  <a class="btn btn-outline-danger" (click)="open(EliminarFila);c('Close click')"><i class="fa fa-minus-circle"></i></a> |
+                  <a class="btn btn-outline-danger" (click)="open(EliminarFila);"><i class="fa fa-minus-circle"></i></a> |
                   <a class="btn btn-outline-success" (click)="generarArchivo(row.idRow);" ><i class="fa fa-download"></i></a>
               </ng-template> 
           </td>

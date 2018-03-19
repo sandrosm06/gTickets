@@ -39,11 +39,31 @@
             <td>{{section.sectionName}}</td>
             <td>
               <div class="botones" *ngIf="section.idSection;else noId">
-                  <a class="btn btn-outline-danger" (click)="onDeleteSection(section);"><i class="fa fa-minus-circle"></i></a>
+                  <!--a class="btn btn-outline-danger" (click)="onDeleteSection(section);"><i class="fa fa-minus-circle"></i></a-->
+                  <a class="btn btn-outline-danger" (click)="open(DelSection);"><i class="fa fa-minus-circle"></i></a>
+
               </div>
               <ng-template #noId>
                   <a (click)="onDeleteSection(section);" class="btn btn-sm btn-danger">Quiero eliminarlo</a>
               </ng-template>
+              <ng-template #DelSection let-c="close" let-d="dismiss">
+                  <div class="modal-header">
+                      <h4 class="modal-title">Atención</h4>
+                      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p>Esta a punto de eliminar esta Localidad!&hellip;</p>
+                      <p>¿Desea continuar con esta acción?</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline-dark" (click)="deleteSection(section);onDeleteSection(section);c('Close click')" >Eliminar</button>
+                      <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+                    </div>
+
+              </ng-template>
+
             </td>
           </tr>     
         </tbody>

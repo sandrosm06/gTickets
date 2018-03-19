@@ -4,6 +4,8 @@ import { SectionService } from '../../services/section.service';
 import { ConfigurationService } from '../../services/configuration.service';
 import { Configuration } from '../../models/configurations';
 import { Section } from '../../models/section';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-add-section',
@@ -19,12 +21,15 @@ export class AddSectionComponent implements OnInit {
 	sectionsConf=[];
 	//public name:string;
 	public localidad:string;
-  public message:string;
+	public message:string;
+  	closeResult: string;
+
   
   constructor(
     private _route: ActivatedRoute,
 		private _router: Router,
 		private _sectionService: SectionService,
+		private _modalService: NgbModal,
 		private _configurationService: ConfigurationService
   ) {
     this.sections = new Section(0,'',0);
@@ -131,4 +136,41 @@ export class AddSectionComponent implements OnInit {
 		);
 	}
 
+	deleteSection(section:any){
+		this._sectionService.deleteSection(section.idSection).subscribe(
+			response => {
+				if(response.code == 200){
+					
+					console.log(response.message);
+				}else{
+					this.message="no se ha encontrado configuraciones";
+					console.log(this.message);
+				}
+			},
+			error => {
+				console.log(<any>error);
+			}
+		);
+	}
+	borrarConfirm(sect:any){
+		console.log(sect);
+	}
+
+	open(content) {
+		this._modalService.open(content).result.then((result) => {
+				this.closeResult = `Closed with: ${result}`;
+		}, (reason) => {
+		  this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+		});
+	}
+
+	private getDismissReason(reason: any): string {
+		if (reason === ModalDismissReasons.ESC) {
+			return 'by pressing ESC';
+		  } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+			  return 'by clicking on a backdrop';
+		  } else {
+			  return  `with: ${reason}`;
+		  }
+	  }
 }

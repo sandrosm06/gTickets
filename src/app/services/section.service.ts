@@ -22,6 +22,10 @@ export class SectionService{
 	getSectionsEvent(id:number){
 		return this._http.get(this.url+'get-sections-event/'+id).map(res => res.json());
 	}
+
+	deleteSection(idSection:number){
+		return this._http.get(this.url+'delete-section/'+idSection).map(res => res.json());
+	}
 	saveSection(section){
 		//console.log(contactoProveedor);
 		let json = JSON.stringify(section);

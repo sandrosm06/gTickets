@@ -19,6 +19,10 @@ export class ConfigurationService{
 		return this._http.get(this.url+'get-configurations/'+id).map(res => res.json());
 	}
 
+	deleteConfiguration(idConfiguration:number){
+		return this._http.get(this.url+'delete-configuration/'+idConfiguration).map(res => res.json());
+	}
+
 	saveConfiguration(configuration: any){
 		//console.log(contactoProveedor);
 		let json = JSON.stringify(configuration);

@@ -3,6 +3,8 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Configuration } from '../../models/configurations';
 import { ConfigurationService } from '../../services/configuration.service';
 import { EventInformationService } from '../../services/event-information.service';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+
 import * as _ from 'lodash';    
 
 @Component({
@@ -11,7 +13,9 @@ import * as _ from 'lodash';
   styleUrls: ['./add-configurations.component.scss']
 })
 export class AddConfigurationsComponent implements OnInit {
-  public title: string;
+	public title: string;
+	closeResult: string;
+
 	public configurations: Configuration;
 	public eventDetail=[];
 	localidades=[];
@@ -27,6 +31,7 @@ export class AddConfigurationsComponent implements OnInit {
     private _route: ActivatedRoute,
 		private _router: Router,
 		private _configurationService: ConfigurationService,
+		private _modalService: NgbModal,
 		private _eventInformationService: EventInformationService
   ) {
     this.configurations = new Configuration(0,'','',0);
@@ -158,5 +163,40 @@ export class AddConfigurationsComponent implements OnInit {
 		
 
 	}
+
+
+
+	borrarConfirm(config:any){
+		this._configurationService.deleteConfiguration(config.idConfiguration).subscribe(
+			response => {
+				if(response.code == 200){
+					console.log(response.message);
+				}else{
+					console.log(response.message);
+				}
+			},
+			error => {
+				console.log(<any>error);
+			}
+		);
+	}
+
+	open(content) {
+		this._modalService.open(content).result.then((result) => {
+				this.closeResult = `Closed with: ${result}`;
+		}, (reason) => {
+		  this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+		});
+	}
+
+	private getDismissReason(reason: any): string {
+		if (reason === ModalDismissReasons.ESC) {
+			return 'by pressing ESC';
+		  } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+			  return 'by clicking on a backdrop';
+		  } else {
+			  return  `with: ${reason}`;
+		  }
+	  }
 
 }

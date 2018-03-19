@@ -35,13 +35,34 @@
           <td>{{configuration.name}}</td>
           <td>{{configuration.seatsNumber}}</td>
           <td>
-            <div class="botones" *ngIf="confirmado != configuration.idConfiguration">
-              <a (click)="borrarConfirm(configuration);" class="btn btn-sm btn-danger">X</a>
+            <div class="botones" *ngIf="configuration.idConfiguration != 0; else noId">
+              <!--a (click)="borrarConfirm(configuration);" class="btn btn-sm btn-danger">X</a-->
+              <a class="btn btn-outline-danger" (click)="open(DelConfiguration);c('Close click')"><i class="fa fa-minus-circle"></i></a>
+
             </div>
-            <div class="botones" *ngIf="confirmado == configuration.idConfiguration">
-              <a (click)="onDeleteConfiguration(configuration);" class="btn btn-sm btn-danger">Quiero eliminarlo</a>
-              <a (click)="cancelarConfirm();" class="btn btn-sm btn-warning">Cancelar</a>
-            </div>
+            <ng-template #noId>
+                <div class="botones">
+                    <a (click)="onDeleteConfiguration(configuration);" class="btn btn-outline-danger">Quiero eliminarlo</a>
+                  </div>
+            </ng-template>
+
+            <ng-template #DelConfiguration let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                    <h4 class="modal-title">Atención</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p>Esta a punto de eliminar esta Localidad!&hellip;</p>
+                    <p>¿Desea continuar con esta acción?</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark" (click)="borrarConfirm(configuration);onDeleteConfiguration(configuration);c('Close click')" >Eliminar</button>
+                    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+                  </div>
+            </ng-template>
+            
           </td>
         </tr>     
       </tbody>

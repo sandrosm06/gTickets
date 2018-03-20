@@ -64,7 +64,7 @@ export class EventService{
 	}
 
 	onUpdateEventDetail(event:any){
-		//console.log(venue);
+		console.log(event);
 		let json = JSON.stringify(event);
 		let params = 'json='+json;
     	let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});

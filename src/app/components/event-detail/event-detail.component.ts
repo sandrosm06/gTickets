@@ -33,6 +33,7 @@ export class EventDetailComponent implements OnInit {
 	public createdSections:boolean=false;
 	public editVenue:boolean=false;
 	public editDate:boolean=false; 
+	public editAforo:boolean=false; 
 	public editDetails:boolean=false;
 
 	public editConfigurations:boolean=false;
@@ -103,6 +104,8 @@ export class EventDetailComponent implements OnInit {
   
   updateEventDetail(edit:boolean, event:any){
 		this.editVenue=edit;
+		this.editDate=edit;
+		this.editAforo=edit;
 		this._eventService.onUpdateEventDetail(event).subscribe(
 		response => {
 			//console.log(response);
@@ -123,15 +126,34 @@ export class EventDetailComponent implements OnInit {
 		console.log(edit);
   }
   
+  onDeleteRow(id:any){
+	console.log(id);
+	var indice = this.rows.indexOf(id);
+	//console.log(indice);
+	this.rows.splice(indice,1);
+	this.totalAforo();
+}
+  
+  editEventAforo(edit:boolean){
+	this.editAforo = edit;
+	console.log(edit);
+ }	
+
   saveEventDate(edit:boolean, venue:any){
 		this.editDate=edit;
 		console.log(venue);
   }
 
+  saveEventAforo(edit:boolean, venue:any){
+	this.editAforo=edit;
+	console.log(venue);
+  }
   editDetail(edit:boolean, venue:any){
 		this.editDetails=edit;
 		console.log(edit);
 	}
+
+	
 	
   saveEventDetail(edit:boolean, venue:any){
 		this.editDetails=edit;
@@ -348,22 +370,7 @@ export class EventDetailComponent implements OnInit {
 		this.aforoTotal=0;
 		this.aforoLocalidades=0;
 		this.isSeatsOk=true;
-    //console.log(this.rows);
-		/*for(var i=0; i<this.rows.length; i++){
-			this.aforoTotal = this.aforoTotal + parseInt(this.rows[i].seatsPerRow);
-			this.aforoLocalidades = this.aforoLocalidades + parseInt(this.rows[i].seatsNumber);
-		}
-		
-		for(var i=0; i<this.event.length; i++){
-			//console.log(this.aforoLocalidades);
-			if(this.aforoTotal > this.event[i].seats || this.aforoLocalidades > this.event[i].seats ){
-				this._flashMessage.show('Error en Aforo!', {cssClass: 'alert-danger', timeout: 4000});
-				this.isSeatsOk=false;
-			}else{
-				this.isSeatsOk=true;
-			}
-		}
-		console.log(this.aforoTotal);*/
+    
 	}
 	
 

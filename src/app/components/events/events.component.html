@@ -9,7 +9,8 @@
         <th>Lugar</th>
         <th>Direccion</th>
         <th>Contacto</th>
-        <th>Aforo</th>
+        <th>Aforo Local</th>
+        <th>Aforo Evento</th>
         <th>Acciones</th>
       </tr>
     </thead>
@@ -20,6 +21,7 @@
         <td>{{event.venue}}</td>
         <td>{{event.address}}</td>
         <td>{{event.phone}}</td>
+        <td>{{event.seatsVenue}}</td>
         <td>{{event.seats}}</td>
         <td>
           <!--a (click)="generarTickets(row);" class="btn btn-sm btn-danger">Generar Boletos</a-->

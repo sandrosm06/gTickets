@@ -16,7 +16,7 @@
   </h3>  
   <h3>
     Aforo:
-    <small class="text-muted">{{e.seats}}</small>
+    <small class="text-muted">{{e.seatsVenue}}</small>
   </h3> 
   <hr class="mt-3" />
   <h3 *ngIf="!editVenue; else noEditName">
@@ -39,9 +39,20 @@
   <ng-template #noEditDate>
     <h3>
       Fecha:
-      <small class="text-muted"><input type="text" class="editable-cell" [(ngModel)]="e.date" /> </small><small><a (click)="saveEventDate(false, e)"><i class="fa fa-save"></i></a></small>
+      <small class="text-muted"><input type="text" class="editable-cell" [(ngModel)]="e.date" /> </small><small><a (click)="updateEventDetail(false, e)"><i class="fa fa-save"></i></a></small>
     </h3>
   </ng-template>
+
+  <h3 *ngIf="!editAforo; else noEditAforo">
+      Aforo del Evento:
+      <small class="text-muted">{{e.seats}}</small><small><a (click)="editEventAforo(true)"> <i class="fa fa-edit"></i></a></small>
+    </h3>
+    <ng-template #noEditAforo>
+      <h3>
+        Fecha:
+        <small class="text-muted"><input type="text" class="editable-cell" [(ngModel)]="e.seats" /> </small><small><a (click)="updateEventDetail(false, e)"><i class="fa fa-save"></i></a></small>
+      </h3>
+    </ng-template>
   
   
   <hr class="mt-3" />
@@ -214,7 +225,7 @@
                   <p>¿Desea continuar con esta acción?</p>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-outline-dark" (click)="eliminarRow(row);c('Close click')" >Eliminar</button>
+                  <button type="button" class="btn btn-outline-dark" (click)="eliminarRow(row);onDeleteRow(row);c('Close click')" >Eliminar</button>
                   <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
                 </div>
           </ng-template>

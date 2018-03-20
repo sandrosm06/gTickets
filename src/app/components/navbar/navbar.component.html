@@ -18,8 +18,13 @@
       <li class="nav-item" *ngIf="!isLogin">
         <a class="nav-link" href="#" routerLink="/register">Register</a>
       </li>
+      
       <li class="nav-item" *ngIf="isLogin">
-        <a class="nav-link" href="#" (click)="onClickLogOut()" >Salir</a>
+          <span class="nav-link"><i class="fa fa-user"> {{emailUser}}</i></span>
+      </li>
+
+      <li class="nav-item" *ngIf="isLogin">
+          <a class="nav-link" href="#" (click)="onClickLogOut()" >Salir</a>
       </li>
       
     </ul>

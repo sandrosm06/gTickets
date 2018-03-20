@@ -11,6 +11,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalChangeGenerateTicketsComponent } from '../modal-change-generate-tickets/modal-change-generate-tickets.component';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {ChangeDetectorRef} from '@angular/core';
+import { AuthService } from '../../services/auth.service';
+
 
 
 
@@ -50,9 +52,14 @@ export class EventDetailComponent implements OnInit {
 	public totalSeats=[];
 
 	public modal:ModalChangeGenerateTicketsComponent;
-  
+	
+	public isLogin:boolean;
+	public username:string;
+	public emailUser:string;
+	public uid:string;
 
   constructor(
+	private _authService: AuthService,
     private _eventService: EventService,
     private _route: ActivatedRoute,
     private _router: Router,
@@ -70,9 +77,23 @@ export class EventDetailComponent implements OnInit {
 	 }
 
   ngOnInit() {
+	  	this.checkUser();
 		this.iniciar();
   }
 
+  checkUser(){
+	this._authService.getAuth().subscribe( auth => {
+		if(auth){
+		  this.isLogin = true;
+		  this.username = auth.displayName;
+		  this.emailUser = auth.email;
+		  this.uid = auth.uid;
+		  
+		}else{
+		  this.isLogin = false;
+		}
+	  });
+  }
 	private iniciar() {
 		this.getIdEvent();
 		//this.getSections();

@@ -54,7 +54,7 @@ export class AddVenueComponent implements OnInit {
 		this._venueService.saveVenue(this.venue).subscribe(
 			response=>{
 				if (response.code==200){
-					this._router.navigate(['/add-event']);
+					this._router.navigate(['/venues']);
 					console.log("response");
 				} else {
 					console.log(response);

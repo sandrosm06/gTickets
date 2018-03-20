@@ -4,6 +4,8 @@ import { Configuration } from '../../models/configurations';
 import { ConfigurationService } from '../../services/configuration.service';
 import { EventInformationService } from '../../services/event-information.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { EventService } from '../../services/event.service';
+
 
 import * as _ from 'lodash';    
 
@@ -25,14 +27,18 @@ export class AddConfigurationsComponent implements OnInit {
 	public idEvent:number;
 	public aforo=[];
 	public aforoTotal:number=0;
-  public message:string;
+	public message:string;
+	public event=[];
+
   
   constructor(
     private _route: ActivatedRoute,
 		private _router: Router,
 		private _configurationService: ConfigurationService,
 		private _modalService: NgbModal,
-		private _eventInformationService: EventInformationService
+		private _eventInformationService: EventInformationService,
+		private _eventService: EventService
+
   ) {
     this.configurations = new Configuration(0,'','',0);
    }
@@ -45,6 +51,26 @@ export class AddConfigurationsComponent implements OnInit {
 		this.getConfigurations(this.idEvent);
 		//this.aforoTotal=this.aforo.totalSeats;
 		console.log(this.aforo);
+		this.getVenue();
+
+  }
+
+  getVenue(){
+    this._eventService.getEventDetail(this.idEvent).subscribe(
+			response => {
+        //console.log(response);
+				if(response.code == 200){
+					this.event = response.data;
+					console.log(this.event);
+					//console.log(response.data);
+				}else{
+					//console.log(response );
+				}
+			},
+			error => {
+				console.log(<any>error);
+			});
+			//console.log(this.event.length);
   }
   onSubmit(){
 		console.log("Submit");

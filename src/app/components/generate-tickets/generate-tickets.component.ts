@@ -5,6 +5,8 @@ import { ExcelService } from '../../services/excel.service';
 import { Configuration } from '../../models/configurations';
 import { Section } from '../../models/section';
 import { EventInformationService } from '../../services/event-information.service';
+import { EventService } from '../../services/event.service';
+
 
 
 @Component({
@@ -22,6 +24,8 @@ export class GenerateTicketsComponent implements OnInit {
 	public message:string;
 	//public isGenerated:boolean = false;
 	public idGenerated=[];
+	public event=[];
+
 	//@Input() idConfiguration:number;
 
   constructor(
@@ -29,7 +33,8 @@ export class GenerateTicketsComponent implements OnInit {
 		private _router: Router,
 		private _generateService: GenerateService,
 		private _excelService: ExcelService,
-		private _eventInformationService: EventInformationService
+		private _eventInformationService: EventInformationService,
+		private _eventService: EventService
   ) { }
 
   ngOnInit() {
@@ -37,7 +42,27 @@ export class GenerateTicketsComponent implements OnInit {
 	this.getRows();
 	this.getRowsGenerated();
 	this.getEventDetail(this.idEvent);
+	this.getVenue();
   }
+
+  getVenue(){
+    this._eventService.getEventDetail(this.idEvent).subscribe(
+			response => {
+        //console.log(response);
+				if(response.code == 200){
+					this.event = response.data;
+					console.log(this.event);
+					//console.log(response.data);
+				}else{
+					//console.log(response );
+				}
+			},
+			error => {
+				console.log(<any>error);
+			});
+			//console.log(this.event.length);
+  }
+
   getRows(){
 		this._generateService.getRows(this.idEvent).subscribe(
 			result => {

@@ -53,7 +53,8 @@
         Aforo total configurado: <small class="text-muted">{{getSumRows()}}</small>
     </h3>
     <hr class="mt-2">
-    <div *ngIf="getSumSeats() < e.seats">
+    <div *ngIf="getSumRows() < getSumSeats()">
+      
         <h4>
             Agregar Localidades:<a class="btn btn-outline-success" (click)="agregarLocalidades();"><i class="fa fa-plus"></i></a> 
         </h4>

@@ -4,6 +4,7 @@ import { SectionService } from '../../services/section.service';
 import { ConfigurationService } from '../../services/configuration.service';
 import { Configuration } from '../../models/configurations';
 import { Section } from '../../models/section';
+import { EventService } from '../../services/event.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -22,15 +23,16 @@ export class AddSectionComponent implements OnInit {
 	//public name:string;
 	public localidad:string;
 	public message:string;
-  	closeResult: string;
-
+	closeResult: string;
+	public event=[];
   
   constructor(
     private _route: ActivatedRoute,
 		private _router: Router,
 		private _sectionService: SectionService,
 		private _modalService: NgbModal,
-		private _configurationService: ConfigurationService
+		private _configurationService: ConfigurationService,
+		private _eventService: EventService
   ) {
     this.sections = new Section(0,'',0);
    }
@@ -39,6 +41,8 @@ export class AddSectionComponent implements OnInit {
     this.getIdEvent();
 		this.getConfigurations(this.idEvent);
 		this.getSections();
+		this.getVenue();
+
   }
   onSubmit(){
 		console.log("Submit");
@@ -46,6 +50,23 @@ export class AddSectionComponent implements OnInit {
 		//this._router.navigate(['/configurations');
 		
 	}
+	getVenue(){
+		this._eventService.getEventDetail(this.idEvent).subscribe(
+				response => {
+			//console.log(response);
+					if(response.code == 200){
+						this.event = response.data;
+						console.log(this.event);
+						//console.log(response.data);
+					}else{
+						//console.log(response );
+					}
+				},
+				error => {
+					console.log(<any>error);
+				});
+				//console.log(this.event.length);
+	  }
 
 	saveSection(){
 		console.log(this.sectionsConf);

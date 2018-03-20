@@ -1,7 +1,42 @@
 <div class="jumbotron">
+
+    <div *ngFor="let e of event">
+        <h3>
+          Lugar:
+          <small class="text-muted">{{e.venue}} </small>
+        </h3> 
+        
+      
+        <h3>
+          Dirección:
+          <small class="text-muted">{{e.address}}</small>
+        </h3>
+        <h3>
+          Teléfono de contacto:
+          <small class="text-muted">{{e.phone}}</small>
+        </h3>  
+        <h3>
+          Aforo:
+          <small class="text-muted">{{e.seats}}</small>
+        </h3> 
+        <hr class="mt-3" />
+        <h3>
+          Nombre del Evento:
+          <small class="text-muted">{{e.nameEvent}}</small>
+        </h3>
+      
+      
+        <h3>
+          Fecha:
+          <small class="text-muted">{{e.date}}</small>
+        </h3>
+        
+  </div>      
+  <hr class="mt3">
+
   <form #formAddRows="ngForm" (ngSubmit)="onSubmit()" id="form-add-rows">
-    <div class="form-group">
-      <label>Localidades</label>
+    <div class="form-group" *ngIf="aforoSeccion <= asistentes || aforoTotal == 0; else disabledSelect" >
+      <h3>Localidades</h3>
       <ng-select [items]="configurations"
                 bindLabel="name"
                 bindValue="idConfiguration"
@@ -11,25 +46,48 @@
                 [ngModelOptions]="{standalone: true}">
       </ng-select>
     
-      
-    </div>
-
-    <div class="form-group">
-      <label>Secciones</label>
+    
+      <h3>Secciones</h3>
       <ng-select [items]="sections"
                 bindLabel="name"
                 bindValue="idSection"
                 placeholder="Selecciona la Localidad"
                 [(ngModel)]="idSection"
                 (change)="selectedSection($event)"
-                [ngModelOptions]="{standalone: true}">
+                [ngModelOptions]="{standalone: true}"
+                >
       </ng-select>
 
-      
-
-    
     </div>
 
+    <ng-template #disabledSelect> 
+        <h3>Localidades</h3>
+        <ng-select [items]="configurations"
+                  bindLabel="name"
+                  bindValue="idConfiguration"
+                  placeholder="Selecciona la Localidad"
+                  [(ngModel)]="idConfiguration"
+                  (change)="selected($event)"
+                  [ngModelOptions]="{standalone: true}"
+                  disabled>
+        </ng-select>
+      
+        
+      <!--/div>
+  
+      <div class="form-group"-->
+        <h3>Secciones</h3>
+        <ng-select [items]="sections"
+                  bindLabel="name"
+                  bindValue="idSection"
+                  placeholder="Selecciona la Localidad"
+                  [(ngModel)]="idSection"
+                  (change)="selectedSection($event)"
+                  [ngModelOptions]="{standalone: true}"
+                  disabled>
+                  
+        </ng-select>
+    </ng-template>
 
     <div>
       <div *ngFor="let totalSeats of aforo">
@@ -49,6 +107,38 @@
     </div>
 
     <a (click)="addRowTable(name, seats);" class="btn btn-sm btn-warning">Agregar</a>
+<hr class="mt-3">
+
+<div *ngIf="aforo;else noAforo">
+    <div *ngFor="let totalSeats of aforo">
+      <div *ngIf="aforoTotal <= totalSeats.totalSeats; else other_content">
+        <!--div *ngIf="aforoSeccion<=asistentes;else noAforoLocalidad"-->
+        <div *ngIf="aforoSeccion > asistentes">
+            <div class="alert alert-dismissible alert-warning">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <h4 class="alert-heading">Warning!</h4>
+                <p class="mb-0"> {{aforoSeccion}} - {{asistentes}} ¡El número de asistentes SUPERA el aforo de esta localidad!.</p>
+              </div>
+        </div>
+    </div>
+  </div>
+  <!--ng-template #noAforoLocalidad>
+      
+  </ng-template-->
+      
+    <ng-template #other_content>
+      <div class="alert alert-dismissible alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <h4 class="alert-heading">Warning!</h4>
+        <p class="mb-0">¡El número de asistentes no puede superar el aforo total!</p>
+      </div>
+    </ng-template>
+  <ng-template #noAforo>Ingrese al menos una localidad...</ng-template>
+
+</div>
+
+
+
 
     <table id="entry-grid" datatable="ng" class="table table-hover">
       <thead>
@@ -61,6 +151,7 @@
           <th>Acciones</th>
         </tr>
       </thead>
+
       <tbody>
         <tr align="left" *ngFor="let row of rows">
           <td>{{row.localidad}}</td>
@@ -99,20 +190,15 @@
         </tr>     
       </tbody>
     </table>
-
-  <div *ngIf="aforo;else noAforo">
-      <div *ngFor="let totalSeats of aforo">
-        <div *ngIf="aforoTotal <= totalSeats.totalSeats; else other_content">
-          <div *ngIf="aforoSeccion<=asistentes;else noAforoLocalidad">
-            <button type="submit" class="btn btn-default">Siguiente</button>
-          </div>
-          <ng-template #noAforoLocalidad><h2>¡El número de asistentes SUPERA el aforo de esta localidad!</h2></ng-template>
-      </div>
-      <ng-template #other_content><h2>¡El número de asistentes no puede superar el aforo total!</h2></ng-template>
+    
+    <div *ngIf="aforoSeccion > asistentes || aforoTotal == 0; else NoOkButton">
+        <button type="submit" class="btn btn-default" disabled>Siguiente</button>
     </div>
-    <ng-template #noAforo>Ingrese al menos una localidad...</ng-template>
-
-  </div>
+    <ng-template #NoOkButton>
+        <button type="submit" class="btn btn-default">Siguiente</button>
+    </ng-template>
+    
+    
     <!--button type="submit" class="btn btn-default">Siguiente</button-->
 
   </form>

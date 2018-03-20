@@ -4,6 +4,7 @@ import { ConfigurationService } from '../../services/configuration.service';
 import { SectionService } from '../../services/section.service';
 import { RowService } from '../../services/row.service';
 import { EventInformationService } from '../../services/event-information.service';
+import { EventService } from '../../services/event.service';
 import { Configuration } from '../../models/configurations';
 import { Section } from '../../models/section';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -33,6 +34,8 @@ export class AddRowsComponent implements OnInit {
 	public message:string;
 	public asistentes:number=0;
 	closeResult: string;
+	public event=[];
+
 
 
   
@@ -44,6 +47,7 @@ export class AddRowsComponent implements OnInit {
 		private _rowService:RowService,
 		private _eventInformationService: EventInformationService,
 		private _modalService: NgbModal,
+		private _eventService: EventService
 
   ) { }
 
@@ -52,7 +56,27 @@ export class AddRowsComponent implements OnInit {
 		this.getConfigurations(this.idEvent);
 		this.getAforo(this.idEvent);
 		this.getRows(this.idEvent);
+		this.getVenue();
   }
+
+  getVenue(){
+    this._eventService.getEventDetail(this.idEvent).subscribe(
+			response => {
+        //console.log(response);
+				if(response.code == 200){
+					this.event = response.data;
+					console.log(this.event);
+					//console.log(response.data);
+				}else{
+					//console.log(response );
+				}
+			},
+			error => {
+				console.log(<any>error);
+			});
+			//console.log(this.event.length);
+  }
+
   onSubmit(){
 		console.log("Submit");
 		//this._router.navigate(['/home']);
@@ -115,6 +139,8 @@ export class AddRowsComponent implements OnInit {
 
 	selected(id:any) {
 		console.log(id);
+		this.asistentes=0;
+		this.aforoSeccion=0;
 		if (id!=null){
 		    this.idConfiguration = id.idConfiguration;
 		    this.getSections(this.idConfiguration);
@@ -145,7 +171,7 @@ export class AddRowsComponent implements OnInit {
 
 	addRowTable(nameRow:string, seatsNumber:string){
 		console.log(name);
-  		this.rows.push({"idRow":0, "localidad":this.localidad, "sectionName":this.sectionName, "rowName":nameRow, "seatsPerRow":seatsNumber, "idSection": this.idSection});
+  		this.rows.push({"idRow":0, "localidad":this.localidad, "sectionName":this.sectionName, "rowName":nameRow, "seatsPerRow":seatsNumber, "idSection": this.idSection, "idConfiguration": this.idConfiguration});
 		console.log(this.rows);
 		//var newJsonFile = _.uniqBy(this.rows, 'name');
 		//this.rows = newJsonFile;
@@ -180,9 +206,9 @@ export class AddRowsComponent implements OnInit {
 		console.log(this.aforoTotal);
 		
 		this.aforoSeccion=0;
-		//console.log(this.rows);
+		console.log(this.idConfiguration);
 		for(var i=0; i<this.rows.length; i++){
-			if(this.idSection==this.rows[i].idSection){
+			if(this.idConfiguration==this.rows[i].idConfiguration){
 				this.aforoSeccion = this.aforoSeccion + parseInt(this.rows[i].seatsPerRow);
 			}
 		}

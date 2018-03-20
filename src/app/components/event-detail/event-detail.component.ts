@@ -566,5 +566,9 @@ export class EventDetailComponent implements OnInit {
 		this._router.navigate(['/add-sections/'+this.idEvent]);
 		
 	}
+	agregarFilas(){
+		this._router.navigate(['/add-rows/'+this.idEvent]);
+		
+	}
 
 }

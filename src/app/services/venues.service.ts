@@ -20,6 +20,10 @@ export class VenuesService {
 		return this._http.get(this.url+'get-venues/'+uid).map(res => res.json());
 	}
 
+	getVenue(id:number){
+		return this._http.get(this.url+'get-venue/'+id).map(res => res.json());
+	}
+
 	saveVenue(venue: any){
 		//console.log(contactoProveedor);
 		let json = JSON.stringify(venue);

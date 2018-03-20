@@ -32,7 +32,7 @@ export class EventService{
 		//console.log(contactoProveedor);
 		let json = JSON.stringify(event);
 		let params = 'json='+json;
-    let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+    	let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
     
 		return this._http.post(this.url+'save_event', params, {headers: headers})
 						 .map(res => res.json());

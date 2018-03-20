@@ -4,6 +4,7 @@ export class Event{
 		public name: string,
 		public date: string,
 		public isActive: string,
+		public aforo: number,
 		public Venue_idVenue: number
 	){}
 }

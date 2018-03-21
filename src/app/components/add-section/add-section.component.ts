@@ -6,6 +6,8 @@ import { Configuration } from '../../models/configurations';
 import { Section } from '../../models/section';
 import { EventService } from '../../services/event.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from '../../services/auth.service';
+
 
 
 @Component({
@@ -25,6 +27,10 @@ export class AddSectionComponent implements OnInit {
 	public message:string;
 	closeResult: string;
 	public event=[];
+	public isLogin:boolean;
+    public username:string;
+    public emailUser:string;
+    public uid:string;
   
   constructor(
     private _route: ActivatedRoute,
@@ -32,18 +38,36 @@ export class AddSectionComponent implements OnInit {
 		private _sectionService: SectionService,
 		private _modalService: NgbModal,
 		private _configurationService: ConfigurationService,
-		private _eventService: EventService
+		private _eventService: EventService,
+		private _authService: AuthService
+
   ) {
     this.sections = new Section(0,'',0);
    }
 
+
   ngOnInit() {
-    this.getIdEvent();
-		this.getConfigurations(this.idEvent);
-		this.getSections();
-		this.getVenue();
+	this.checkUser();	
+	this.getIdEvent();
+	this.getConfigurations(this.idEvent);
+	this.getSections();
+	this.getVenue();
 
   }
+
+  checkUser(){
+    this._authService.getAuth().subscribe( auth => {
+        if(auth){
+          this.isLogin = true;
+          this.username = auth.displayName;
+          this.emailUser = auth.email;
+          this.uid = auth.uid;
+          
+        }else{
+          this.isLogin = false;
+        }
+      });
+	}
   onSubmit(){
 		console.log("Submit");
 		this.saveSection();

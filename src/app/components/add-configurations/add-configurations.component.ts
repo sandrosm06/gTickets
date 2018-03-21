@@ -5,6 +5,8 @@ import { ConfigurationService } from '../../services/configuration.service';
 import { EventInformationService } from '../../services/event-information.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { EventService } from '../../services/event.service';
+import { AuthService } from '../../services/auth.service';
+
 
 
 import * as _ from 'lodash';    
@@ -29,6 +31,10 @@ export class AddConfigurationsComponent implements OnInit {
 	public aforoTotal:number=0;
 	public message:string;
 	public event=[];
+	public isLogin:boolean;
+    public username:string;
+    public emailUser:string;
+    public uid:string;
 
   
   constructor(
@@ -37,14 +43,17 @@ export class AddConfigurationsComponent implements OnInit {
 		private _configurationService: ConfigurationService,
 		private _modalService: NgbModal,
 		private _eventInformationService: EventInformationService,
-		private _eventService: EventService
+		private _eventService: EventService,
+	    private _authService: AuthService,
+
 
   ) {
     this.configurations = new Configuration(0,'','',0);
    }
 
   ngOnInit() {
-    	this.getIdEvent();
+	    this.checkUser();
+		this.getIdEvent();
 		this.configurations.events_idEvent=this.idEvent;
 		this.getAforo(this.idEvent);
 		this.getEventDetail(this.idEvent);
@@ -54,6 +63,19 @@ export class AddConfigurationsComponent implements OnInit {
 		this.getVenue();
 
   }
+  checkUser(){
+    this._authService.getAuth().subscribe( auth => {
+        if(auth){
+          this.isLogin = true;
+          this.username = auth.displayName;
+          this.emailUser = auth.email;
+          this.uid = auth.uid;
+          
+        }else{
+          this.isLogin = false;
+        }
+      });
+	}
 
   getVenue(){
     this._eventService.getEventDetail(this.idEvent).subscribe(

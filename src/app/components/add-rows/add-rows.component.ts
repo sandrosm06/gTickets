@@ -9,6 +9,7 @@ import { Configuration } from '../../models/configurations';
 import { Section } from '../../models/section';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-add-rows',
@@ -35,6 +36,10 @@ export class AddRowsComponent implements OnInit {
 	public asistentes:number=0;
 	closeResult: string;
 	public event=[];
+	public isLogin:boolean;
+    public username:string;
+    public emailUser:string;
+    public uid:string;
 
 
 
@@ -47,16 +52,31 @@ export class AddRowsComponent implements OnInit {
 		private _rowService:RowService,
 		private _eventInformationService: EventInformationService,
 		private _modalService: NgbModal,
-		private _eventService: EventService
-
+		private _eventService: EventService,
+		private _authService: AuthService
   ) { }
 
   ngOnInit() {
-    this.getIdEvent();
-		this.getConfigurations(this.idEvent);
-		this.getAforo(this.idEvent);
-		this.getRows(this.idEvent);
-		this.getVenue();
+	this.checkUser();
+	this.getIdEvent();
+	this.checkUser();	
+	this.getConfigurations(this.idEvent);
+	this.getAforo(this.idEvent);
+	this.getRows(this.idEvent);
+	this.getVenue();
+  }
+  checkUser(){
+    this._authService.getAuth().subscribe( auth => {
+        if(auth){
+          this.isLogin = true;
+          this.username = auth.displayName;
+          this.emailUser = auth.email;
+          this.uid = auth.uid;
+          
+        }else{
+          this.isLogin = false;
+        }
+      });
   }
 
   getVenue(){

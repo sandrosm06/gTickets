@@ -1,7 +1,6 @@
 <div class="jumbotron mt-5" *ngFor="let e of event">
     
   <div *ngIf="e.uid == uid; else noLogin">
-    UID: {{e.uid}}
     <h3>
       Lugar:
       <small class="text-muted">{{e.venue}} </small>

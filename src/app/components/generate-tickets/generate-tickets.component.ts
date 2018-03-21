@@ -6,6 +6,7 @@ import { Configuration } from '../../models/configurations';
 import { Section } from '../../models/section';
 import { EventInformationService } from '../../services/event-information.service';
 import { EventService } from '../../services/event.service';
+import { AuthService } from '../../services/auth.service';
 
 
 
@@ -25,26 +26,43 @@ export class GenerateTicketsComponent implements OnInit {
 	//public isGenerated:boolean = false;
 	public idGenerated=[];
 	public event=[];
-
+	public isLogin:boolean;
+    public username:string;
+    public emailUser:string;
+    public uid:string;
 	//@Input() idConfiguration:number;
 
   constructor(
     private _route: ActivatedRoute,
-		private _router: Router,
-		private _generateService: GenerateService,
-		private _excelService: ExcelService,
-		private _eventInformationService: EventInformationService,
-		private _eventService: EventService
+	private _router: Router,
+	private _generateService: GenerateService,
+	private _excelService: ExcelService,
+	private _eventInformationService: EventInformationService,
+	private _authService: AuthService,
+	private _eventService: EventService
   ) { }
 
   ngOnInit() {
+	this.checkUser();
     this.getIdEvent();
 	this.getRows();
 	this.getRowsGenerated();
 	this.getEventDetail(this.idEvent);
 	this.getVenue();
   }
-
+  checkUser(){
+	    this._authService.getAuth().subscribe( auth => {
+	        if(auth){
+	          this.isLogin = true;
+	          this.username = auth.displayName;
+	          this.emailUser = auth.email;
+	          this.uid = auth.uid;
+	          
+	        }else{
+	          this.isLogin = false;
+	        }
+	      });
+	  }
   getVenue(){
     this._eventService.getEventDetail(this.idEvent).subscribe(
 			response => {

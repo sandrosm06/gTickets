@@ -24,7 +24,7 @@ export class ConfigurationService{
 	}
 
 	saveConfiguration(configuration: any){
-		//console.log(contactoProveedor);
+		////console.log(contactoProveedor);
 		let json = JSON.stringify(configuration);
 		let params = 'json='+json;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});

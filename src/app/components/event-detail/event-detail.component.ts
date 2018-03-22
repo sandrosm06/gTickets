@@ -109,7 +109,7 @@ export class EventDetailComponent implements OnInit {
 		//this.getSumRows();
 		//this.getSumConfigurations();
 		//this.getSumSeats();
-		console.log(this.config);
+		//console.log(this.config);
 	}
 
   getIdEvent(){
@@ -120,7 +120,7 @@ export class EventDetailComponent implements OnInit {
   }
   editEventName(edit:boolean){
 		this.editVenue=edit;
-		console.log(edit);
+		//console.log(edit);
   }
   
   updateEventDetail(edit:boolean, event:any){
@@ -129,56 +129,56 @@ export class EventDetailComponent implements OnInit {
 		this.editAforo=edit;
 		this._eventService.onUpdateEventDetail(event).subscribe(
 		response => {
-			//console.log(response);
+			////console.log(response);
 			if(response.code == 200){
 				this._flashMessage.show(response.message, {cssClass: 'alert-danger', timeout: 4000});
 			}else{
-				//console.log(response );
+				////console.log(response );
 				this._flashMessage.show(response.message, {cssClass: 'alert-danger', timeout: 4000});
 			}
 		},
 		error => {
-			console.log(<any>error);
+			//console.log(<any>error);
 		});
   }
 
   editEventDate(edit:boolean){
 		this.editDate = edit;
-		console.log(edit);
+		//console.log(edit);
   }
   
   onDeleteRow(id:any){
-	console.log(id);
+	//console.log(id);
 	var indice = this.rows.indexOf(id);
-	//console.log(indice);
+	////console.log(indice);
 	this.rows.splice(indice,1);
 	this.totalAforo();
 }
   
   editEventAforo(edit:boolean){
 	this.editAforo = edit;
-	console.log(edit);
+	//console.log(edit);
  }	
 
   saveEventDate(edit:boolean, venue:any){
 		this.editDate=edit;
-		console.log(venue);
+		//console.log(venue);
   }
 
   saveEventAforo(edit:boolean, venue:any){
 	this.editAforo=edit;
-	console.log(venue);
+	//console.log(venue);
   }
   editDetail(edit:boolean, venue:any){
 		this.editDetails=edit;
-		console.log(edit);
+		//console.log(edit);
 	}
 
 	
 	
   saveEventDetail(edit:boolean, venue:any){
 		this.editDetails=edit;
-		console.log(venue);
+		//console.log(venue);
 		//if(this.isSeatsOk){
 			this._eventService.deleteTickets(venue.idRow).subscribe(
 				response => {
@@ -190,25 +190,25 @@ export class EventDetailComponent implements OnInit {
 					}
 				},
 				error =>{
-					console.log(<any>error);
+					//console.log(<any>error);
 				}
 			);
 			
 			
 			this._eventService.onUpdateDetail(venue).subscribe(
 				response => {
-					//console.log(response);
+					////console.log(response);
 					if(response.code == 200){
 						this._flashMessage.show(response.message, {cssClass: 'alert-danger', timeout: 4000});
 						venue.isTicketsGenerated=0;
-						console.log(venue);
+						//console.log(venue);
 					}else{
-						//console.log(response );
+						////console.log(response );
 						this._flashMessage.show(response.message, {cssClass: 'alert-danger', timeout: 4000});
 					}
 				},
 				error => {
-					console.log(<any>error);
+					//console.log(<any>error);
 				});
 		/*}else{
 			this._flashMessage.show('No se puede actualizar los registros, verifique el Aforo', {cssClass: 'alert-danger', timeout: 4000});
@@ -218,83 +218,83 @@ export class EventDetailComponent implements OnInit {
 
 		this.cancelEventDetail(false);
 		
-		//console.log("sale");
+		////console.log("sale");
   }
 
   getVenue(){
     this._eventService.getEventDetail(this.idEvent).subscribe(
 			response => {
-        //console.log(response);
+        ////console.log(response);
 				if(response.code == 200){
 					this.event = response.data;
-					console.log(this.event);
-					//console.log(response.data);
+					//console.log(this.event);
+					////console.log(response.data);
 				}else{
-					//console.log(response );
+					////console.log(response );
 				}
 			},
 			error => {
-				console.log(<any>error);
+				//console.log(<any>error);
 			});
-			//console.log(this.event.length);
+			////console.log(this.event.length);
   }
 
   isCreatedConfigurations(){
     this._eventService.isCreatedConfigurations(this.idEvent).subscribe(
 			response => {
-        //console.log(response);
+        ////console.log(response);
 				if(response.code == 200){
 					this.createdConfigurations=true;
-					console.log(this.createdConfigurations);
-					//console.log(response.data);
+					//console.log(this.createdConfigurations);
+					////console.log(response.data);
 				}else{
 					this.createdConfigurations=false;
-					console.log(this.createdConfigurations);
-					//console.log(response );
+					//console.log(this.createdConfigurations);
+					////console.log(response );
 				}
 			},
 			error => {
-				console.log(<any>error);
+				//console.log(<any>error);
 			});
   }
   isSectionsCreated(){
     this._eventService.isSectionsCreated(this.idEvent).subscribe(
 			response => {
-        //console.log(response);
+        ////console.log(response);
 				if(response.code == 200){
 					this.createdSections=true;
-					console.log(this.createdConfigurations);
-					//console.log(response.data);
+					//console.log(this.createdConfigurations);
+					////console.log(response.data);
 				}else{
 					this.createdConfigurations=false;
-					console.log(this.createdSections);
-					//console.log(response );
+					//console.log(this.createdSections);
+					////console.log(response );
 				}
 			},
 			error => {
-				console.log(<any>error);
+				//console.log(<any>error);
 			});
   }
 
   getRows(){
     this._rowService.getRows(this.idEvent).subscribe(
 			response => {
-        //console.log(response);
+        ////console.log(response);
 				if(response.code == 200){
 					this.rows = response.data;
-					console.log(this.rows);
-					//console.log(response.data);
+					//console.log(this.rows);
+					////console.log(response.data);
 				}else{
-					//console.log(response );
+					////console.log(response );
 				}
 			},
 			error => {
-				console.log(<any>error);
+				//console.log(<any>error);
 			});
   }
 
   generarTickets(row){
-		console.log(row);
+		//console.log(row);
 		this._generateService.generateTicekts(row).subscribe(
 			response=>{
 				if (response.code==200){
@@ -302,16 +302,16 @@ export class EventDetailComponent implements OnInit {
 					//this.isGenerated=true;
 					this.idGenerated.push(row.idRow);
 					row.isTicketsGenerated=1;
-					console.log(this.idGenerated);
-					//console.log(response);
+					//console.log(this.idGenerated);
+					////console.log(response);
 					//this.isGenerated(row.idRow);
 				} else {
-					console.log(response);
+					//console.log(response);
 				}
 
 			},
 			error=>{
-				console.log(<any>error);
+				//console.log(<any>error);
 			});
 	}
 
@@ -320,34 +320,34 @@ export class EventDetailComponent implements OnInit {
 		this._generateService.getTickets(row).subscribe(
 			response=>{
 				if (response.code==200){
-					console.log(response.data);
+					//console.log(response.data);
 					this._excelService.exportAsExcelFile(response.data,"tickets-01");
 					tickets = response.data;
 				} else {
-					console.log(response);
+					//console.log(response);
 				}
 
 			},
 			error=>{
-				console.log(<any>error);
+				//console.log(<any>error);
 			});
   }
   
 
   isGenerated(idRow:number){
-    //console.log(idRow);
-    //console.log(this.idGenerated);
+    ////console.log(idRow);
+    ////console.log(this.idGenerated);
 		var retorna=false;
 		for (var i = 0; i < this.idGenerated.length; i++) {
 
 			if (this.idGenerated[i] == idRow) {
-				//console.log("retorna true");
-				//console.log(this.idGenerated[i]);
+				////console.log("retorna true");
+				////console.log(this.idGenerated[i]);
 				retorna=true;
 				
 			}
 		}
-		//console.log(retorna);
+		////console.log(retorna);
 		return retorna;
 
   }
@@ -362,32 +362,32 @@ export class EventDetailComponent implements OnInit {
 						this.idGenerated.push(data[i].Rows_idRow);
 					}
 				} else {
-					console.log(response.status);
+					//console.log(response.status);
 				}
 
 			},
 			error=>{
-				console.log(<any>error);
+				//console.log(<any>error);
 			}
 		);
 
 	}
 
 	seatsPerRow(row:any){
-		console.log(row);
+		//console.log(row);
 		if(parseInt(row.seatsPerRow) <= parseInt(row.seatsNumber)){
 			row.isSeatsOK=true;
-			console.log(row.isSeatsOK);
+			//console.log(row.isSeatsOK);
 		}else{
 			row.isSeatsOK=false;
-			console.log(row.isSeatsOK);
+			//console.log(row.isSeatsOK);
 		}	
 	}
 
 	
 	
 	totalAforo(){
-		console.log("entra a total aforo");
+		//console.log("entra a total aforo");
 		this.aforoTotal=0;
 		this.aforoLocalidades=0;
 		this.isSeatsOk=true;
@@ -396,22 +396,22 @@ export class EventDetailComponent implements OnInit {
 	
 
 	getConfigurations(){
-		console.log("configuraciones");
+		//console.log("configuraciones");
     this._eventService.getConfigurations(this.idEvent).subscribe(
 			response => {
-        //console.log(response);
+        ////console.log(response);
 				if(response.code == 200){
 					this.configurations = response.data;
 					this.config = this.configurations;
-					console.log(this.configurations);
+					//console.log(this.configurations);
 					//this.getSections();
 
 				}else{
-					console.log(response.message );
+					//console.log(response.message );
 				}
 			},
 			error => {
-				console.log(<any>error);
+				//console.log(<any>error);
 			});
 			
 	}
@@ -421,23 +421,23 @@ export class EventDetailComponent implements OnInit {
 			response => {
 				if(response.code == 200){
 					this.sections = response.data;
-					console.log(this.sections);
-					//console.log(response.data);
+					//console.log(this.sections);
+					////console.log(response.data);
 				}else{
-					//console.log(response );
+					////console.log(response );
 				}
 			},
 			error => {
-				console.log(<any>error);
+				//console.log(<any>error);
 			});
 	}
 
 	getSumSeats(){
 		this.suma=0;
-		//console.log("Entra a sumar " + this.configurations.length);
+		////console.log("Entra a sumar " + this.configurations.length);
 		for(let i = 0; i < this.configurations.length; i++){
-			//console.log(this.configurations[i].seatsNumber);
-			//console.log(this.config);
+			////console.log(this.configurations[i].seatsNumber);
+			////console.log(this.config);
 			this.suma=this.suma+parseInt(this.configurations[i].seatsNumber);
 		}
 		return(this.suma);
@@ -456,19 +456,19 @@ export class EventDetailComponent implements OnInit {
 		
 		this._eventService.getConfigurations(this.idEvent).subscribe(
 			response => {
-				console.log(this.idEvent);
-        //console.log(response);
+				//console.log(this.idEvent);
+        ////console.log(response);
 				if(response.code == 200){
 					this.config = response.data;
-					console.log(config2);
+					//console.log(config2);
 					//this.getSections();
 
 				}else{
-					console.log(response.message );
+					//console.log(response.message );
 				}
 			},
 			error => {
-				console.log(<any>error);
+				//console.log(<any>error);
 			});
 			//return (config2);
 	}
@@ -477,72 +477,72 @@ export class EventDetailComponent implements OnInit {
 			response => {
 				if(response.code == 200){
 					this.aforoLocalidades = response.data;
-					//console.log(response.data);
+					////console.log(response.data);
 				}else{
-					//console.log(response );
+					////console.log(response );
 				}
 			},
 			error => {
-				console.log(<any>error);
+				//console.log(<any>error);
 			});
 	}
 	
 	editSection(edit:boolean, sec:any){
 		this.editSections=edit;
-		console.log(edit);
+		//console.log(edit);
 	}
 
 	cancelSection(edit:boolean){
 		this.editSections=edit;
-		console.log(edit);
+		//console.log(edit);
 	}
 	
 	editConfiguration(edit:boolean, config:any){
 		this.editConfigurations=edit;
-		console.log(edit);
+		//console.log(edit);
 	}
 
 	cancelConfiguration(edit:boolean){
 		this.editConfigurations=edit;
-		console.log(edit);
+		//console.log(edit);
 	}
 	cancelEventDetail(edit:boolean){
 		this.editDetails=edit;
 	}
 	updateConfiguration (edit:boolean, config:any){
 			this.editConfigurations=edit;
-		console.log(config);
+		//console.log(config);
 		this._eventService.updateConfigurations(config).subscribe(
 			response => {
-				//console.log(response);
+				////console.log(response);
 				if(response.code == 200){
 					this._flashMessage.show(response.message, {cssClass: 'alert-danger', timeout: 4000});
 				}else{
-					//console.log(response );
+					////console.log(response );
 					this._flashMessage.show(response.message, {cssClass: 'alert-danger', timeout: 4000});
 				}
 			},
 			error => {
-				console.log(<any>error);
+				//console.log(<any>error);
 			});
 
 			this.ngOnInit();
 	}
 	updateSection (edit:boolean, sect:any){
 		this.editSections=edit;
-		console.log(sect);
+		//console.log(sect);
 		this._eventService.updateSections(sect).subscribe(
 			response => {
-				//console.log(response);
+				////console.log(response);
 				if(response.code == 200){
 					this._flashMessage.show(response.message, {cssClass: 'alert-danger', timeout: 4000});
 				}else{
-					//console.log(response );
+					////console.log(response );
 					this._flashMessage.show(response.message, {cssClass: 'alert-danger', timeout: 4000});
 				}
 			},
 			error => {
-				console.log(<any>error);
+				//console.log(<any>error);
 			});
 
 			this.ngOnInit();
@@ -557,7 +557,7 @@ export class EventDetailComponent implements OnInit {
 	}
 	
 	eliminarRow(row:any){
-		console.log(row);
+		//console.log(row);
 
 		this._eventService.deleteRow(row.idRow).subscribe(
 			response => {
@@ -569,7 +569,7 @@ export class EventDetailComponent implements OnInit {
 				}
 			},
 			error =>{
-				console.log(<any>error);
+				//console.log(<any>error);
 			}
 		);
 		

@@ -69,7 +69,7 @@ export class AddSectionComponent implements OnInit {
       });
 	}
   onSubmit(){
-		console.log("Submit");
+		//console.log("Submit");
 		this.saveSection();
 		//this._router.navigate(['/configurations');
 		
@@ -77,36 +77,36 @@ export class AddSectionComponent implements OnInit {
 	getVenue(){
 		this._eventService.getEventDetail(this.idEvent).subscribe(
 				response => {
-			//console.log(response);
+			////console.log(response);
 					if(response.code == 200){
 						this.event = response.data;
-						console.log(this.event);
-						//console.log(response.data);
+						//console.log(this.event);
+						////console.log(response.data);
 					}else{
-						//console.log(response );
+						////console.log(response );
 					}
 				},
 				error => {
-					console.log(<any>error);
+					//console.log(<any>error);
 				});
-				//console.log(this.event.length);
+				////console.log(this.event.length);
 	  }
 
 	saveSection(){
-		console.log(this.sectionsConf);
+		//console.log(this.sectionsConf);
 		this.getIdEvent();
 		this._sectionService.saveSection(this.sectionsConf).subscribe(
 			response=>{
 				if (response.code==200){
 					this._router.navigate(['/add-rows/'+this.idEvent]);
-					console.log("response");
+					//console.log("response");
 				} else {
-					console.log(response);
+					//console.log(response);
 				}
 
 			},
 			error=>{
-				console.log(<any>error);
+				//console.log(<any>error);
 			}
 		);
 	}
@@ -117,14 +117,14 @@ export class AddSectionComponent implements OnInit {
 			response => {
 				if(response.code == 200){
 					this.configurations = response.data;
-					console.log(this.configurations);
+					//console.log(this.configurations);
 				}else{
 					this.message="no se ha encontrado Localidades";
-					console.log(this.message);
+					//console.log(this.message);
 				}
 			},
 			error => {
-				console.log(<any>error);
+				//console.log(<any>error);
 			}
 		);
 	}
@@ -138,7 +138,7 @@ export class AddSectionComponent implements OnInit {
 
 	selected(id:any) {
 
-		console.log(id);
+		//console.log(id);
 		if (id!=null){
 		    this.idConfiguration = id.idConfiguration;
 			this.localidad = id.name;
@@ -149,17 +149,17 @@ export class AddSectionComponent implements OnInit {
   	}
 
   	addSectionTable(nameSection: string){
-  		console.log(nameSection);
+  		//console.log(nameSection);
   		this.sectionsConf.push({"idSection":0,"localidad":this.localidad, "sectionName":nameSection, "idConfiguration":this.idConfiguration});
-		console.log(this.sectionsConf);
+		//console.log(this.sectionsConf);
 		//var newJsonFile = _.uniqBy(this.sectionsConf, 'name');
 		//this.sectionsConf = newJsonFile;
   	}
 
   	onDeleteSection(id:any){
-		//console.log(id);
+		////console.log(id);
 		var indice = this.sectionsConf.indexOf(id);
-		//console.log(indice);
+		////console.log(indice);
 		this.sectionsConf.splice(indice,1);
 		//this.totalAforo();
 	}
@@ -169,14 +169,14 @@ export class AddSectionComponent implements OnInit {
 			response => {
 				if(response.code == 200){
 					this.sectionsConf = response.data;
-					console.log(this.sectionsConf);
+					//console.log(this.sectionsConf);
 				}else{
 					this.message="no se ha encontrado configuraciones";
-					console.log(this.message);
+					//console.log(this.message);
 				}
 			},
 			error => {
-				console.log(<any>error);
+				//console.log(<any>error);
 			}
 		);
 	}
@@ -186,14 +186,14 @@ export class AddSectionComponent implements OnInit {
 			response => {
 				if(response.code == 200){
 					
-					console.log(response.message);
+					//console.log(response.message);
 				}else{
 					this.message="no se ha encontrado configuraciones";
-					console.log(this.message);
+					//console.log(this.message);
 				}
 			},
 			error => {
-				console.log(<any>error);
+				//console.log(<any>error);
 			}
 		);
 	}

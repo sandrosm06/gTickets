@@ -25,7 +25,7 @@ export class VenuesService {
 	}
 
 	saveVenue(venue: any){
-		//console.log(contactoProveedor);
+		////console.log(contactoProveedor);
 		let json = JSON.stringify(venue);
 		let params = 'json='+json;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});

@@ -59,7 +59,7 @@ export class AddConfigurationsComponent implements OnInit {
 		this.getEventDetail(this.idEvent);
 		this.getConfigurations(this.idEvent);
 		//this.aforoTotal=this.aforo.totalSeats;
-		console.log(this.aforo);
+		//console.log(this.aforo);
 		this.getVenue();
 
   }
@@ -80,22 +80,22 @@ export class AddConfigurationsComponent implements OnInit {
   getVenue(){
     this._eventService.getEventDetail(this.idEvent).subscribe(
 			response => {
-        //console.log(response);
+        ////console.log(response);
 				if(response.code == 200){
 					this.event = response.data;
-					console.log(this.event);
-					//console.log(response.data);
+					//console.log(this.event);
+					////console.log(response.data);
 				}else{
-					//console.log(response );
+					////console.log(response );
 				}
 			},
 			error => {
-				console.log(<any>error);
+				//console.log(<any>error);
 			});
-			//console.log(this.event.length);
+			////console.log(this.event.length);
   }
   onSubmit(){
-		console.log("Submit");
+		//console.log("Submit");
 		this.saveConfigurations();
 		//this._router.navigate(['/sections']);
 	}
@@ -103,26 +103,26 @@ export class AddConfigurationsComponent implements OnInit {
 	addConfigurationTable(nameConfig:string, seatsNumber){
 		//this.localidades.push({"name":nameConfig, "seats":seatsNumber, "idEvent":this.idEvent});
 		this.localidades.push({"idConfiguration":0, "name":nameConfig, "seatsNumber":seatsNumber, "events_idEvent":this.idEvent});
-		//console.log(this.localidades);
+		////console.log(this.localidades);
 		var newJsonFile = _.uniqBy(this.localidades, 'name');
 		this.localidades = newJsonFile;
-		//console.log(this.localidades.length);
+		////console.log(this.localidades.length);
 		this.totalAforo();	
 	}
 	totalAforo(){
 		this.aforoTotal=0;
 		for(var i=0; i<this.localidades.length; i++){
-			//console.log(this.localidades[i].seats);
+			////console.log(this.localidades[i].seats);
 			//this.aforoTotal = this.aforoTotal + parseInt(this.localidades[i].seats);
 			this.aforoTotal = this.aforoTotal + parseInt(this.localidades[i].seatsNumber);
 		}
-		//console.log(this.aforoTotal);
+		////console.log(this.aforoTotal);
 	}
 
 	onDeleteConfiguration(id:any){
-		//console.log(id);
+		////console.log(id);
 		var indice = this.localidades.indexOf(id);
-		//console.log(indice);
+		////console.log(indice);
 		this.localidades.splice(indice,1);
 		this.totalAforo();
 	}
@@ -131,20 +131,20 @@ export class AddConfigurationsComponent implements OnInit {
 	}
 
 	saveConfigurations(){
-		console.log(this.localidades);
+		//console.log(this.localidades);
 
 		this._configurationService.saveConfiguration(this.localidades).subscribe(
 			response=>{
 				if (response.code==200){
 					this._router.navigate(['/add-sections/'+this.idEvent]);
-					console.log("response");
+					//console.log("response");
 				} else {
-					console.log(response);
+					//console.log(response);
 				}
 
 			},
 			error=>{
-				console.log(<any>error);
+				//console.log(<any>error);
 			}
 		);
 	}
@@ -161,15 +161,15 @@ export class AddConfigurationsComponent implements OnInit {
 			response => {
 				if(response.code == 200){
 					this.aforo = response.data;
-					//console.log(this.aforo);
-					//console.log(response.data);
+					////console.log(this.aforo);
+					////console.log(response.data);
 				}else{
 					this.message="no se ha encontrado aforo";
-					console.log(this.message);
+					//console.log(this.message);
 				}
 			},
 			error => {
-				console.log(<any>error);
+				//console.log(<any>error);
 			}
 		);
 	}
@@ -178,15 +178,15 @@ export class AddConfigurationsComponent implements OnInit {
 			response => {
 				if(response.code == 200){
 					this.eventDetail = response.data;
-					//console.log(this.aforo);
-					//console.log(response.data);
+					////console.log(this.aforo);
+					////console.log(response.data);
 				}else{
 					this.message="no se ha encontrado informacion de evento";
-					console.log(this.message);
+					//console.log(this.message);
 				}
 			},
 			error => {
-				console.log(<any>error);
+				//console.log(<any>error);
 			}
 		);
 	}
@@ -197,15 +197,15 @@ export class AddConfigurationsComponent implements OnInit {
 				if(response.code == 200){
 					this.localidades = response.data;
 					this.totalAforo();
-					console.log(this.localidades);
-					//console.log(response.data);
+					//console.log(this.localidades);
+					////console.log(response.data);
 				}else{
 					this.message="no se ha encontrado aforo";
-					console.log(this.message);
+					//console.log(this.message);
 				}
 			},
 			error => {
-				console.log(<any>error);
+				//console.log(<any>error);
 			}
 		);
 		
@@ -218,13 +218,13 @@ export class AddConfigurationsComponent implements OnInit {
 		this._configurationService.deleteConfiguration(config.idConfiguration).subscribe(
 			response => {
 				if(response.code == 200){
-					console.log(response.message);
+					//console.log(response.message);
 				}else{
-					console.log(response.message);
+					//console.log(response.message);
 				}
 			},
 			error => {
-				console.log(<any>error);
+				//console.log(<any>error);
 			}
 		);
 	}

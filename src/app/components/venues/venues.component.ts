@@ -26,7 +26,7 @@ export class VenuesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-		//console.log('Se ha cargado el componente home.component.ts');
+		////console.log('Se ha cargado el componente home.component.ts');
 		this.getUid();
 		//this.getVenues();
 	}
@@ -34,8 +34,8 @@ export class VenuesComponent implements OnInit {
 		
 		this._authService.getAuth().subscribe( auth => {
       if(auth){
-				//console.log("entra");
-        //console.log(auth.uid);
+				////console.log("entra");
+        ////console.log(auth.uid);
 				this.uid = auth.uid;
 				this.isLogin = true;
 				this.emailUser = auth.email;
@@ -49,27 +49,27 @@ export class VenuesComponent implements OnInit {
 		
 	}
   getVenues(){
-		console.log(this.uid);
+		//console.log(this.uid);
 		this._venueService.getVenues(this.uid).subscribe(
 			response => {
 				if(response.code == 200){
 					this.venues = response.data;
-					console.log(this.venues);
+					//console.log(this.venues);
 				}else{
 					this.message="no se ha encontrado Locales";
-					console.log(this.message);
+					//console.log(this.message);
 				}
 			},
 			error => {
-				console.log(<any>error);
+				//console.log(<any>error);
 			}
 		);
 	}
 	onDeleteRow(idVenue:number){
-		console.log(idVenue);
+		//console.log(idVenue);
 	}
 	addEvent(idVenue:number){
-		console.log(idVenue);
+		//console.log(idVenue);
 		this._router.navigate(['/add-event/'+idVenue]);
 	}
 	addNewVenue(){

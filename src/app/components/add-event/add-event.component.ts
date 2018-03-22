@@ -31,7 +31,7 @@ export class AddEventComponent implements OnInit {
   }
 
   onSubmit(){
-		console.log("Submit");
+		//console.log("Submit");
 		this.saveEvent();
 		//this._router.navigate(['/configurations');
 	}
@@ -39,35 +39,35 @@ export class AddEventComponent implements OnInit {
 	getVenue(){
     this._venuesService.getVenue(this.idVenue).subscribe(
 			response => {
-        //console.log(response);
+        ////console.log(response);
 				if(response.code == 200){
 					this.venue = response.data;
-					console.log(this.venue);
-					//console.log(response.data);
+					//console.log(this.venue);
+					////console.log(response.data);
 				}else{
-					//console.log(response );
+					////console.log(response );
 				}
 			},
 			error => {
-				console.log(<any>error);
+				//console.log(<any>error);
 			});
-			//console.log(this.event.length);
+			////console.log(this.event.length);
   }
 
 	saveEvent(){
-		console.log(this.event);
+		//console.log(this.event);
 		this._eventService.saveEvent(this.event).subscribe(
 			response=>{
 				if (response.code==200){
 					this._router.navigate(['/add-configurations/'+response.id.ID]);
-					console.log("response");
+					//console.log("response");
 				} else {
-					console.log(response);
+					//console.log(response);
 				}
 
 			},
 			error=>{
-				console.log(<any>error);
+				//console.log(<any>error);
 			}
 		);
 	}

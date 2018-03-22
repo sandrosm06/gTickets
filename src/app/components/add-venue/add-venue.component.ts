@@ -32,7 +32,7 @@ export class AddVenueComponent implements OnInit {
   ngOnInit() {
 		this._authService.getAuth().subscribe( auth => {
       if(auth){
-        console.log(auth.uid);
+        //console.log(auth.uid);
         this.isLogin = true;
 				this.emailUser = auth.email;
 				this.venue.uid = auth.uid;
@@ -45,24 +45,24 @@ export class AddVenueComponent implements OnInit {
   }
 
   onSubmit(){
-		console.log("Submit");
+		//console.log("Submit");
 		this.saveVenue();
 		//this._router.navigate(['/add-event');
 	}
   saveVenue(){
-		console.log(this.venue);
+		//console.log(this.venue);
 		this._venueService.saveVenue(this.venue).subscribe(
 			response=>{
 				if (response.code==200){
 					this._router.navigate(['/venues']);
-					console.log("response");
+					//console.log("response");
 				} else {
-					console.log(response);
+					//console.log(response);
 				}
 
 			},
 			error=>{
-				console.log(<any>error);
+				//console.log(<any>error);
 			}
 		);
 	}
@@ -72,21 +72,21 @@ export class AddVenueComponent implements OnInit {
 			response => {
 				if(response.code == 200){
 					this.venues = response.data;
-					console.log(this.venues);
+					//console.log(this.venues);
 				}else{
 					this.message="no se ha encontrado configuraciones";
-					console.log(this.message);
+					//console.log(this.message);
 				}
 			},
 			error => {
-				console.log(<any>error);
+				//console.log(<any>error);
 			}
 		);
 	}
 	onDeleteRow(idVenue:number){
-		console.log(idVenue);
+		//console.log(idVenue);
 	}
 	addEvent(idVenue:number){
-		console.log(idVenue);
+		//console.log(idVenue);
 	}
 }

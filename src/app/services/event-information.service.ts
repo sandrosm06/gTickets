@@ -20,7 +20,7 @@ export class EventInformationService{
 		return this._http.get(this.url+'get-aforo/'+idEvent).map(res => res.json());
 	}
 	getEventDetail(id:number){
-		//console.log(uid);
+		////console.log(uid);
 		return this._http.get(this.url+'get-event-detail/'+id).map(res => res.json());
 	}
 

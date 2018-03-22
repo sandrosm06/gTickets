@@ -27,7 +27,7 @@ export class SectionService{
 		return this._http.get(this.url+'delete-section/'+idSection).map(res => res.json());
 	}
 	saveSection(section){
-		//console.log(contactoProveedor);
+		////console.log(contactoProveedor);
 		let json = JSON.stringify(section);
 		let params = 'json='+json;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});

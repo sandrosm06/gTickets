@@ -66,19 +66,19 @@ export class GenerateTicketsComponent implements OnInit {
   getVenue(){
     this._eventService.getEventDetail(this.idEvent).subscribe(
 			response => {
-        //console.log(response);
+        ////console.log(response);
 				if(response.code == 200){
 					this.event = response.data;
-					console.log(this.event);
-					//console.log(response.data);
+					//console.log(this.event);
+					////console.log(response.data);
 				}else{
-					//console.log(response );
+					////console.log(response );
 				}
 			},
 			error => {
-				console.log(<any>error);
+				//console.log(<any>error);
 			});
-			//console.log(this.event.length);
+			////console.log(this.event.length);
   }
 
   getRows(){
@@ -86,39 +86,39 @@ export class GenerateTicketsComponent implements OnInit {
 			result => {
 				
 				if(result.code = 200){
-					console.log(result);
+					//console.log(result);
 					this.rows=result.data;
 				}else{
 					
 					this.message=result.message;
-					console.log(this.message);
+					//console.log(this.message);
 				}
 
 			},
 			error => {
-				console.log(<any>error);
+				//console.log(<any>error);
 			}
 		);
 	}
 
 	generarTickets(row){
-		console.log(row);
+		//console.log(row);
 		this._generateService.generateTicekts(row).subscribe(
 			response=>{
 				if (response.code==200){
 					//this._router.navigate(['/add-sections/'+this.idEvent]);
 					//this.isGenerated=true;
 					this.idGenerated.push(row.idRow);
-					console.log(this.idGenerated);
-					//console.log(response);
+					//console.log(this.idGenerated);
+					////console.log(response);
 					//this.isGenerated(row.idRow);
 				} else {
-					console.log(response);
+					//console.log(response);
 				}
 
 			},
 			error=>{
-				console.log(<any>error);
+				//console.log(<any>error);
 			}
 		);
 	}
@@ -128,16 +128,16 @@ export class GenerateTicketsComponent implements OnInit {
 		this._generateService.getTickets(row).subscribe(
 			response=>{
 				if (response.code==200){
-					console.log(response.data);
+					//console.log(response.data);
 					this._excelService.exportAsExcelFile(response.data,"tickets-01");
 					tickets = response.data;
 				} else {
-					console.log(response);
+					//console.log(response);
 				}
 
 			},
 			error=>{
-				console.log(<any>error);
+				//console.log(<any>error);
 			}
 		);
 
@@ -157,13 +157,13 @@ export class GenerateTicketsComponent implements OnInit {
 		for (var i = 0; i < this.idGenerated.length; i++) {
 
 			if (this.idGenerated[i] == idRow) {
-				//console.log("retorna true");
-				//console.log(this.idGenerated[i]);
+				////console.log("retorna true");
+				////console.log(this.idGenerated[i]);
 				retorna=true;
 				
 			}
 		}
-		//console.log(retorna);
+		////console.log(retorna);
 		return retorna;
 
 	}
@@ -174,16 +174,16 @@ export class GenerateTicketsComponent implements OnInit {
 			response=>{
 				if (response.code==200){
 					retorna = true;
-					console.log(retorna);
+					//console.log(retorna);
 					
 				} else {
 					retorna = false;
-					console.log(retorna);
+					//console.log(retorna);
 				}
 
 			},
 			error=>{
-				console.log(<any>error);
+				//console.log(<any>error);
 			}
 		);
 		return retorna;
@@ -200,12 +200,12 @@ export class GenerateTicketsComponent implements OnInit {
 						this.idGenerated.push(data[i].Rows_idRow);
 					}
 				} else {
-					console.log(response.status);
+					//console.log(response.status);
 				}
 
 			},
 			error=>{
-				console.log(<any>error);
+				//console.log(<any>error);
 			}
 		);
 
@@ -215,15 +215,15 @@ export class GenerateTicketsComponent implements OnInit {
 			response => {
 				if(response.code == 200){
 					this.eventDetail = response.data;
-					//console.log(this.aforo);
-					//console.log(response.data);
+					////console.log(this.aforo);
+					////console.log(response.data);
 				}else{
 					this.message="no se ha encontrado informacion de evento";
-					console.log(this.message);
+					//console.log(this.message);
 				}
 			},
 			error => {
-				console.log(<any>error);
+				//console.log(<any>error);
 			}
 		);
 	}

@@ -82,23 +82,23 @@ export class AddRowsComponent implements OnInit {
   getVenue(){
     this._eventService.getEventDetail(this.idEvent).subscribe(
 			response => {
-        //console.log(response);
+        ////console.log(response);
 				if(response.code == 200){
 					this.event = response.data;
-					console.log(this.event);
-					//console.log(response.data);
+					//console.log(this.event);
+					////console.log(response.data);
 				}else{
-					//console.log(response );
+					////console.log(response );
 				}
 			},
 			error => {
-				console.log(<any>error);
+				//console.log(<any>error);
 			});
-			//console.log(this.event.length);
+			////console.log(this.event.length);
   }
 
   onSubmit(){
-		console.log("Submit");
+		//console.log("Submit");
 		//this._router.navigate(['/home']);
 		this.saveRow();
 	}
@@ -111,14 +111,14 @@ export class AddRowsComponent implements OnInit {
 					this._router.navigate(['/generate-tickets/'+this.idEvent]);
 					//Generar Boletos
 					this.generate=true;
-					console.log("response");
+					//console.log("response");
 				} else {
-					console.log(response);
+					//console.log(response);
 				}
 
 			},
 			error=>{
-				console.log(<any>error);
+				//console.log(<any>error);
 			}
 		);
 	}
@@ -128,14 +128,14 @@ export class AddRowsComponent implements OnInit {
 			response => {
 				if(response.code == 200){
 					this.configurations = response.data;
-					//console.log(this.configurations);
+					////console.log(this.configurations);
 				}else{
 					this.message="no se ha encontrado configuraciones";
-					//console.log(this.message);
+					////console.log(this.message);
 				}
 			},
 			error => {
-				console.log(<any>error);
+				//console.log(<any>error);
 			}
 		);
 	}
@@ -145,20 +145,20 @@ export class AddRowsComponent implements OnInit {
 			response => {
 				if(response.code == 200){
 					this.sections = response.data;
-					console.log(this.sections);
+					//console.log(this.sections);
 				}else{
 					this.message="no se ha encontrado configuraciones";
-					console.log(this.message);
+					//console.log(this.message);
 				}
 			},
 			error => {
-				console.log(<any>error);
+				//console.log(<any>error);
 			}
 		);
 	}
 
 	selected(id:any) {
-		console.log(id);
+		//console.log(id);
 		this.asistentes=0;
 		this.aforoSeccion=0;
 		if (id!=null){
@@ -173,7 +173,7 @@ export class AddRowsComponent implements OnInit {
 	  
 	  
   	selectedSection(id:any) {
-		console.log(id);
+		//console.log(id);
 		if (id!=null){
 		    this.idSection = id.idSection;
 		    this.sectionName = id.name;
@@ -190,49 +190,49 @@ export class AddRowsComponent implements OnInit {
 	}
 
 	addRowTable(nameRow:string, seatsNumber:string){
-		console.log(name);
+		//console.log(name);
   		this.rows.push({"idRow":0, "localidad":this.localidad, "sectionName":this.sectionName, "rowName":nameRow, "seatsPerRow":seatsNumber, "idSection": this.idSection, "idConfiguration": this.idConfiguration});
-		console.log(this.rows);
+		//console.log(this.rows);
 		//var newJsonFile = _.uniqBy(this.rows, 'name');
 		//this.rows = newJsonFile;
 		this.totalAforo();
 	}
 	deleteRow(row:any){
-		console.log(row);
+		//console.log(row);
 		this._rowService.deleteRow(row.idRow).subscribe(
 			response => {
 				if(response.code == 200){
 					//this.aforo = response.data;
-					console.log(response.message);
-					//console.log(this.aforo);
-					//console.log(response.data);
+					//console.log(response.message);
+					////console.log(this.aforo);
+					////console.log(response.data);
 				}else{
 					this.message="no se ha eliminado la fila";
-					console.log(this.message);
+					//console.log(this.message);
 				}
 			},
 			error => {
-				console.log(<any>error);
+				//console.log(<any>error);
 			});
 		
 	}
 	totalAforo(){
 		this.aforoTotal=0;
-		//console.log(this.rows);
+		////console.log(this.rows);
 		for(var i=0; i<this.rows.length; i++){
 			//if(this.idSection=)
 			this.aforoTotal = this.aforoTotal + parseInt(this.rows[i].seatsPerRow);
 		}
-		console.log(this.aforoTotal);
+		//console.log(this.aforoTotal);
 		
 		this.aforoSeccion=0;
-		console.log(this.idConfiguration);
+		//console.log(this.idConfiguration);
 		for(var i=0; i<this.rows.length; i++){
 			if(this.idConfiguration==this.rows[i].idConfiguration){
 				this.aforoSeccion = this.aforoSeccion + parseInt(this.rows[i].seatsPerRow);
 			}
 		}
-		console.log(this.aforoSeccion);
+		//console.log(this.aforoSeccion);
 	}
 
 	//totalAforoSeccion(){
@@ -244,23 +244,23 @@ export class AddRowsComponent implements OnInit {
 			response => {
 				if(response.code == 200){
 					this.aforo = response.data;
-					//console.log(this.aforo);
-					//console.log(response.data);
+					////console.log(this.aforo);
+					////console.log(response.data);
 				}else{
 					this.message="no se ha encontrado aforo";
-					console.log(this.message);
+					//console.log(this.message);
 				}
 			},
 			error => {
-				console.log(<any>error);
+				//console.log(<any>error);
 			}
 		);
 	}
 
 	onDeleteRow(id:any){
-		console.log(id);
+		//console.log(id);
 		var indice = this.rows.indexOf(id);
-		//console.log(indice);
+		////console.log(indice);
 		this.rows.splice(indice,1);
 		this.totalAforo();
 	}
@@ -270,15 +270,15 @@ export class AddRowsComponent implements OnInit {
 			response => {
 				if(response.code == 200){
 					this.rows = response.data;
-					console.log(this.rows);
-					//console.log(response.data);
+					//console.log(this.rows);
+					////console.log(response.data);
 				}else{
 					this.message="no se ha encontrado aforo";
-					console.log(this.message);
+					//console.log(this.message);
 				}
 			},
 			error => {
-				console.log(<any>error);
+				//console.log(<any>error);
 			}
 		);
 	}

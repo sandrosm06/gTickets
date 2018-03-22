@@ -20,7 +20,7 @@ export class HomePageComponent implements OnInit {
   ngOnInit() {
     this._authService.getAuth().subscribe( auth => {
       if(auth){
-        console.log(auth.uid);
+        //console.log(auth.uid);
         this.isLogin = true;
         this.username = auth.displayName;
         this.emailUser = auth.email;

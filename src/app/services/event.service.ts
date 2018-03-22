@@ -16,12 +16,12 @@ export class EventService{
 	}
 
 	getEvent(uid:string){
-		//console.log(uid);
+		////console.log(uid);
 		return this._http.get(this.url+'get-events/'+uid).map(res => res.json());
 	}
 
 	getEventDetail(id:number){
-		//console.log(uid);
+		////console.log(uid);
 		return this._http.get(this.url+'get-event-detail/'+id).map(res => res.json());
 	}
 	getLastEvent(){
@@ -29,7 +29,7 @@ export class EventService{
 	}
 
 	saveEvent(event: any){
-		//console.log(contactoProveedor);
+		////console.log(contactoProveedor);
 		let json = JSON.stringify(event);
 		let params = 'json='+json;
     	let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -53,7 +53,7 @@ export class EventService{
 	}
 
 	onUpdateDetail(row:any){
-		console.log(row);
+		//console.log(row);
 		let json = JSON.stringify(row);
 		let params = 'json='+json;
     	let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -64,7 +64,7 @@ export class EventService{
 	}
 
 	onUpdateEventDetail(event:any){
-		console.log(event);
+		//console.log(event);
 		let json = JSON.stringify(event);
 		let params = 'json='+json;
     	let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -75,7 +75,7 @@ export class EventService{
 	}
 
 	updateConfigurations(config:any){
-		//console.log(venue);
+		////console.log(venue);
 		let json = JSON.stringify(config);
 		let params = 'json='+json;
     	let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
@@ -86,7 +86,7 @@ export class EventService{
 	}
 
 	updateSections(sect:any){
-		//console.log(venue);
+		////console.log(venue);
 		let json = JSON.stringify(sect);
 		let params = 'json='+json;
     	let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});

@@ -57,7 +57,7 @@
 
 
     <hr class="mt-3" />
-    <div *ngIf="getSumRows() <= getSumSeats() && getSumSeats() <= e.seats;else errorAforo">
+    <div *ngIf="+getSumRows() <= +getSumSeats() && +getSumSeats() <= +e.seats;else errorAforo">
       <h3>
           Aforo Localidades: <small class="text-muted">{{getSumSeats()}}</small>
       </h3>
@@ -65,7 +65,7 @@
           Aforo total configurado: <small class="text-muted">{{getSumRows()}}</small>
       </h3>
       <hr class="mt-2">
-      <div *ngIf="getSumRows() < getSumSeats()">
+      <div *ngIf="+getSumRows() < +getSumSeats()">
         
           <h4>
               Agregar Localidades:<a class="btn btn-outline-success" (click)="agregarLocalidades();"><i class="fa fa-plus"></i></a> 
@@ -79,7 +79,7 @@
       </div>
     </div> 
     <ng-template #errorAforo>
-        <div *ngIf="getSumRows() <= getSumSeats();else error2" class="alert alert-dismissible alert-warning">
+        <div *ngIf="+getSumRows() <= +getSumSeats();else error2" class="alert alert-dismissible alert-warning">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <p class="mb-0">Error! El Aforo de Localidades no puede superar el Aforo total del evento.</p>
             <div>
@@ -90,7 +90,7 @@
             <h4 class="alert-heading">Warning!</h4>
           </div>
           <ng-template #error2>
-              <div *ngIf="getSumSeats() <= e.seats" class="alert alert-dismissible alert-warning">
+              <div *ngIf="+getSumSeats() <= +e.seats" class="alert alert-dismissible alert-warning">
                   <button type="button" class="close" data-dismiss="alert">&times;</button>
                   <h4 class="alert-heading">Warning!</h4>
                   <p class="mb-0">Error! El aforo de filas no puede superar el Aforo de la localidad.</p>
@@ -174,7 +174,7 @@
 
     <hr class="mt-3" />
 
-    <div *ngIf="getSumRows() > getSumSeats()" class="alert alert-dismissible alert-warning">
+    <div *ngIf="+getSumRows() > +getSumSeats()" class="alert alert-dismissible alert-warning">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <h4 class="alert-heading">Warning!</h4>
           <p class="mb-0">Error! El aforo de filas no puede superar el Aforo de la localidad.</p>
@@ -200,7 +200,7 @@
             <td>{{row.seatsNumber}}</td>
             <td>{{row.sectionName}}</td>
             <td>{{row.rowName}}</td>
-            <td>{{row.seatsPerRow}} - {{row.isSeatsOK}}</td>
+            <td>{{row.seatsPerRow}}</td>
             <td>
                 <!--div *ngIf="!isGenerated(row.idRow);else noGenerate"-->
                 <div *ngIf="row.isTicketsGenerated == 0;else noGenerate">
@@ -245,7 +245,7 @@
                 <td><input type="text" class="form-control form-control-sm" [(ngModel)]="row.seatsPerRow" (input)="seatsPerRow(row)" ></td>
                 <td>
                   <!--div *ngIf="!isGenerated(row.idRow);else noGenerateT"-->
-                  <div *ngIf="row.isTicketsGenerated == 0;else noGenerateT">
+                  <div *ngIf="+row.isTicketsGenerated == 0;else noGenerateT">
                     <div *ngIf="row.isSeatsOK;else noSeatsOk">
                         <a class="btn btn-outline-success" (click)="saveEventDetail(false, row);"><i class="fa fa-save"></i></a> | 
                         <a class="btn btn-outline-success" (click)="generarTickets(row);"><i class="fa fa-minus-circle"> Generar tickets</i></a>

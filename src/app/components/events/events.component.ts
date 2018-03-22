@@ -30,8 +30,8 @@ export class EventsComponent implements OnInit {
 		
 		this._authService.getAuth().subscribe( auth => {
       if(auth){
-				//console.log("entra");
-        //console.log(auth.uid);
+				////console.log("entra");
+        ////console.log(auth.uid);
 				this.uid = auth.uid;
 				this.isLogin = true;
 				this.emailUser = auth.email;
@@ -45,23 +45,23 @@ export class EventsComponent implements OnInit {
 		
   }
   viewDetail(idEvent:any){
-    console.log(idEvent);
+    //console.log(idEvent);
     this._router.navigate(["/event-detail/"+idEvent]);
   }
   getEvents(){
     this._eventService.getEvent(this.uid).subscribe(
 			response => {
-        //console.log(response);
+        ////console.log(response);
 				if(response.code == 200){
 					this.events = response.data;
-					//console.log(this.events);
-					//console.log(response.data);
+					////console.log(this.events);
+					////console.log(response.data);
 				}else{
-					//console.log(response );
+					////console.log(response );
 				}
 			},
 			error => {
-				console.log(<any>error);
+				//console.log(<any>error);
 			}
 		);
   }

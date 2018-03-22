@@ -57,15 +57,15 @@ export class EditConfigurationsComponent implements OnInit {
 			response => {
 				if(response.code == 200){
 					this.aforo = response.data;
-					//console.log(this.aforo);
-					//console.log(response.data);
+					////console.log(this.aforo);
+					////console.log(response.data);
 				}else{
 					this.message="no se ha encontrado aforo";
-					console.log(this.message);
+					//console.log(this.message);
 				}
 			},
 			error => {
-				console.log(<any>error);
+				//console.log(<any>error);
 			}
 		);
 	}
@@ -76,11 +76,11 @@ export class EditConfigurationsComponent implements OnInit {
 					this.eventDetail = response.data;
 				}else{
 					this._flashMessage.show('No se ha encontrado información del evento', {cssClass: 'alert-success', timeout: 4000});
-					console.log(this.message);
+					//console.log(this.message);
 				}
 			},
 			error => {
-				console.log(<any>error);
+				//console.log(<any>error);
 			}
 		);
   }
@@ -90,22 +90,22 @@ export class EditConfigurationsComponent implements OnInit {
 			response => {
 				if(response.code == 200){
 					this.configurations = response.data;
-          console.log(this.configurations);
+          //console.log(this.configurations);
           this.totalAforo();
-					//console.log(response.data);
+					////console.log(response.data);
 				}else{
 					this.message="no se ha encontrado aforo";
-					console.log(this.message);
+					//console.log(this.message);
 				}
 			},
 			error => {
-				console.log(<any>error);
+				//console.log(<any>error);
 		});
   }
 
   updateConfiguration(configuration:any){
-    console.log(this.aforo[0].totalSeats);
-    console.log(this.aforoTotal);
+    //console.log(this.aforo[0].totalSeats);
+    //console.log(this.aforoTotal);
     if (this.aforoTotal <= parseInt(this.aforo[0].totalSeats)) {
       this._configurationService.updateConfiguration(configuration).subscribe(
         response=>{
@@ -113,35 +113,35 @@ export class EditConfigurationsComponent implements OnInit {
             this._flashMessage.show('Se ha actualuzado el registro Correctamente', {cssClass: 'alert-success', timeout: 4000});
             //this._router.navigate(['/generate-tickets/'+this.idEvent]);
             //Generar Boletos
-            console.log("Actualizado");
+            //console.log("Actualizado");
           } else {
-            console.log(response);
+            //console.log(response);
             this._flashMessage.show('El registro no se ha atualizado', {cssClass: 'alert-success', timeout: 4000});
           }
 
         },
         error=>{
-          console.log(<any>error);
+          //console.log(<any>error);
         });
       }else{
         this._flashMessage.show('ERROR! en el Aforo Configurado', {cssClass: 'alert-danger', timeout: 5000});
       }
   }
   deleteConfiguration(configuration:any){
-    //console.log(configuration);
+    ////console.log(configuration);
     if(confirm("¿Esta seguro que desea eliminar la Localidad "+configuration.name + "?" )) {
-      console.log("Implement delete functionality here");
+      //console.log("Implement delete functionality here");
     }
   }
 
   totalAforo(){
     this.aforoTotal=0;
-    console.log(this.configurations);
+    //console.log(this.configurations);
 		for(var i=0; i<this.configurations.length; i++){
-			//console.log(this.localidades[i].seatsNumber);
+			////console.log(this.localidades[i].seatsNumber);
 			this.aforoTotal = this.aforoTotal + parseInt(this.configurations[i].seatsNumber);
 		}
-		//console.log(this.aforoTotal);
+		////console.log(this.aforoTotal);
   }
   
   

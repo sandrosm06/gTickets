@@ -17,11 +17,11 @@ export class SectionsComponent{
 	}
 
 	ngOnInit(){
-		console.log('Se ha cargado el componente home.component.ts');
+		//console.log('Se ha cargado el componente home.component.ts');
 	}
 	
 	onSubmit(){
-		console.log("Submit");
+		//console.log("Submit");
 		this._router.navigate(['/add-rows']);
 	}
 }

@@ -20,7 +20,7 @@ export class GenerateService {
 		//return this._http.get(this.url+'get-section-configurations/'+id).map(res => res.json());
 	//}
 	getRows(idEvent: number){
-		console.log(this.url+'get-rows/'+idEvent);
+		//console.log(this.url+'get-rows/'+idEvent);
 		return this._http.get(this.url+'get-rows/'+idEvent).map(res => res.json());
 	}
 	generateTicekts(row){
@@ -34,7 +34,7 @@ export class GenerateService {
 	
 
 	isTicketsGenerated(row){
-		//console.log(row);
+		////console.log(row);
 		return this._http.get(this.url+'isTicketsGenerated/'+row).map(res => res.json());
 	}
 
@@ -50,7 +50,7 @@ export class GenerateService {
 		return this._http.get(this.url+'get-tickets/'+idRow).map(res => res.json());
 	}
 	/*saveRows(rows[]){
-		//console.log(contactoProveedor);
+		////console.log(contactoProveedor);
 		let json = JSON.stringify(rows);
 		let params = 'json='+json;
 		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});

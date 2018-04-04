@@ -1,10 +1,15 @@
 export class Event{
 	constructor(
 		public idEvent: number,
-		public name: string,
+		public nameEvent: string,
 		public date: string,
-		public isActive: string,
-		public aforo: number,
-		public Venue_idVenue: number
+		public address: string,
+		public active: string,
+		public phone: string,
+		public seatsVenue: string,
+		public venue: string,
+		public uid: string,
+		public seats: string,
+		public idVenue: number
 	){}
 }

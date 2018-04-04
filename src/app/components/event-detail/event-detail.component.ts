@@ -12,6 +12,7 @@ import { ModalChangeGenerateTicketsComponent } from '../modal-change-generate-ti
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {ChangeDetectorRef} from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { Event } from '../../models/event';
 
 
 
@@ -25,7 +26,18 @@ import { AuthService } from '../../services/auth.service';
 export class EventDetailComponent implements OnInit {
   closeResult: string;
   public idEvent:number;
-	public event=[];
+	public event: { idEvent: number, 
+		nameEvent: string, 
+		date: string, 
+		address: string, 
+		active: number,
+		phone: string,
+		seatsVenue: string,
+		venue: string,
+		uid: string,
+		seats: string,
+		idVenue: number}[]=[];
+	//public event:Event;
 	public configurations=[];
 	public config=[];
 	public sections=[];
@@ -57,6 +69,8 @@ export class EventDetailComponent implements OnInit {
 	public username:string;
 	public emailUser:string;
 	public uid:string;
+	public status:boolean=true;
+	public cero:boolean=true;
 
   constructor(
 	private _authService: AuthService,
@@ -73,12 +87,16 @@ export class EventDetailComponent implements OnInit {
 
   ) {
 			//this.configurations = new Configuration(0,'','',0);
-
+		//this.event = new Event(0,'','','','','','','','','',0);
 	 }
 
   ngOnInit() {
 	  	this.checkUser();
 		this.iniciar();
+		//console.log(this.event);
+		//console.log(this.event[0].active);
+		//this.status = this.event[0].active;
+		
   }
 
   checkUser(){
@@ -94,6 +112,46 @@ export class EventDetailComponent implements OnInit {
 		}
 	  });
   }
+  changeStatus(){
+	  
+	  this.status = !this.status;
+	  this._eventService.onUpdateEventStatus(this.status,this.idEvent).subscribe(
+		response => {
+			////console.log(response);
+			if(response.code == 200){
+				this._flashMessage.show(response.message, {cssClass: 'alert-danger', timeout: 4000});
+			}else{
+				////console.log(response );
+				this._flashMessage.show(response.message, {cssClass: 'alert-danger', timeout: 4000});
+			}
+		},
+		error => {
+			//console.log(<any>error);
+		});
+	  console.log(this.status);
+	  console.log(this.event);
+	  
+  }
+	ceroStatus(){
+		this.cero = !this.cero;
+		console.log(this.cero);
+		console.log(this.rows);
+
+		this._rowService.activateTickets(this.rows,this.cero).subscribe(
+			response => {
+				////console.log(response);
+				if(response.code == 200){
+					this._flashMessage.show(response.message, {cssClass: 'alert-danger', timeout: 4000});
+				}else{
+					////console.log(response );
+					this._flashMessage.show(response.message, {cssClass: 'alert-danger', timeout: 4000});
+				}
+			},
+			error => {
+				//console.log(<any>error);
+			});
+
+	}
 	private iniciar() {
 		this.getIdEvent();
 		//this.getSections();
@@ -105,6 +163,7 @@ export class EventDetailComponent implements OnInit {
 		this.getConfigurations();
 		this.getSectionsEvents();
 		this.getSumSeats();
+		this.getTicketStatus();
 		//this.totalAforo();
 		//this.getSumRows();
 		//this.getSumConfigurations();
@@ -227,7 +286,14 @@ export class EventDetailComponent implements OnInit {
         ////console.log(response);
 				if(response.code == 200){
 					this.event = response.data;
-					//console.log(this.event);
+					console.log(this.event);
+					if(this.event[0].active==0){
+						this.status = false;
+					}else{
+						this.status = true;
+					}
+					//this.status = this.event[0].active;
+					
 					////console.log(response.data);
 				}else{
 					////console.log(response );
@@ -237,6 +303,26 @@ export class EventDetailComponent implements OnInit {
 				//console.log(<any>error);
 			});
 			////console.log(this.event.length);
+  }
+
+  getTicketStatus(){
+    this._eventService.getTicketStatus(this.idEvent).subscribe(
+		response => {
+			if(response.code == 200){
+				let contador = response.data;
+				if( parseInt(contador[0].cantidad) > 0){
+					this.cero = true;
+				}else{
+					this.cero = false;
+				}
+				
+			}else{
+			}
+		},
+		error => {
+			//console.log(<any>error);
+		});
+		////console.log(this.event.length);
   }
 
   isCreatedConfigurations(){

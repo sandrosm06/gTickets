@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { Ng5BreadcrumbModule, BreadcrumbService } from 'ng5-breadcrumb';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -76,6 +77,7 @@ import { ModalChangeGenerateTicketsComponent } from './components/modal-change-g
     AngularFireModule.initializeApp(environment.firebaseConfig),
     FlashMessagesModule,
     NgSelectModule,
+    Ng5BreadcrumbModule,
     NgbModule.forRoot()
   ],
   providers: [
@@ -89,7 +91,8 @@ import { ModalChangeGenerateTicketsComponent } from './components/modal-change-g
     SectionService,
     RowService,
     GenerateService,
-    ExcelService
+    ExcelService,
+    BreadcrumbService
   ],
   bootstrap: [AppComponent]
 })

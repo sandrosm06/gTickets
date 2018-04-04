@@ -35,4 +35,14 @@ export class RowService{
 	deleteTickets(idRow){
 		return this._http.get(this.url+'delete-tickets/'+idRow).map(res => res.json());
 	}
+
+	activateTickets(rows:any, cero:any){
+		let json = JSON.stringify(rows);
+		let active = JSON.stringify(cero);
+		let params = 'json='+json+'&active='+active;;
+		let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+
+		return this._http.post(this.url+'reset-tickets', params, {headers: headers})
+						 .map(res => res.json());
+	}
 }

@@ -56,6 +56,33 @@
       </ng-template>
 
 
+
+<!-- Rectangular switch -->
+<!--label class="switch">
+  <input type="checkbox">
+  <span class="slider"></span>
+</label-->
+
+<!-- Rounded switch -->
+<div class="row">
+<h3>Evento Activo: </h3>
+  <label class="switch">
+    <input type="checkbox" [(ngModel)]="status" (click)="changeStatus()">
+    <span class="slider round"></span>
+  </label>
+
+</div>
+
+<div class="row">
+  <h3>Activar todos los tickets: </h3>
+    <label class="switch">
+      <input type="checkbox" [(ngModel)]="cero" (click)="ceroStatus()">
+      <span class="slider round"></span>
+    </label>
+  
+  </div>
+  
+
     <hr class="mt-3" />
     <div *ngIf="+getSumRows() <= +getSumSeats() && +getSumSeats() <= +e.seats;else errorAforo">
       <h3>
@@ -65,7 +92,7 @@
           Aforo total configurado: <small class="text-muted">{{getSumRows()}}</small>
       </h3>
       <hr class="mt-2">
-      <div *ngIf="+getSumRows() < +getSumSeats()">
+      <!--div *ngIf="+getSumRows() < +getSumSeats()"-->
         
           <h4>
               Agregar Localidades:<a class="btn btn-outline-success" (click)="agregarLocalidades();"><i class="fa fa-plus"></i></a> 
@@ -76,7 +103,7 @@
           <h4>
               Agregar Filas: <a class="btn btn-outline-success" (click)="agregarFilas();"><i class="fa fa-plus"></i></a> 
           </h4>
-      </div>
+      <!--/div-->
     </div> 
     <ng-template #errorAforo>
         <div *ngIf="+getSumRows() <= +getSumSeats();else error2" class="alert alert-dismissible alert-warning">

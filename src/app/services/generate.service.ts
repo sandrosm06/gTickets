@@ -49,6 +49,8 @@ export class GenerateService {
 	getTickets(idRow: number){
 		return this._http.get(this.url+'get-tickets/'+idRow).map(res => res.json());
 	}
+
+	
 	/*saveRows(rows[]){
 		////console.log(contactoProveedor);
 		let json = JSON.stringify(rows);

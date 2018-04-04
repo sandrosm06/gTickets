@@ -10,7 +10,18 @@ import { VenuesService } from '../../services/venues.service';
   styleUrls: ['./add-event.component.scss']
 })
 export class AddEventComponent implements OnInit {
-  public event: Event;
+	//public event: Event;
+	public event: { idEvent: number, 
+		nameEvent: string, 
+		date: string, 
+		address: string, 
+		active: number,
+		phone: string,
+		seatsVenue: string,
+		venue: string,
+		uid: string,
+		seats: string,
+		idVenue: number}[]=[];
 	public idVenue: number;
 	public venue=[];
 	
@@ -21,12 +32,13 @@ export class AddEventComponent implements OnInit {
 		private _eventService: EventService,
 		private _venuesService:VenuesService
   ) {
-    this.event = new Event(0,'','','',0,0);
+    //this.event = new Event(0,'','','',0,0);
    }
 
   ngOnInit() {
     this.getIdVenue();
-		this.event.Venue_idVenue=this.idVenue;
+		//this.event.Venue_idVenue=this.idVenue;
+		this.event[0].idVenue=this.idVenue;
 		this.getVenue();
   }
 

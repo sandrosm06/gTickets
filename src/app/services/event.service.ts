@@ -73,6 +73,16 @@ export class EventService{
 						 .map(res => res.json());
 		
 	}
+	onUpdateEventStatus(active:any, idEvent:any){
+		//console.log(event);
+		let json = JSON.stringify(active);
+		let params = 'active='+json+'&idEvent='+idEvent;
+    	let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});
+
+		return this._http.post(this.url+'update-event-status', params, {headers: headers})
+						 .map(res => res.json());
+		
+	}
 
 	updateConfigurations(config:any){
 		////console.log(venue);
@@ -117,5 +127,8 @@ export class EventService{
 		return this._http.get(this.url+'get-sum-seats/'+idEvent).map(res => res.json());
 	}
 	
+	getTicketStatus(idEvent:any){
+		return this._http.get(this.url+'get-tickets-status/'+idEvent).map(res => res.json());
+	}
 	
 }

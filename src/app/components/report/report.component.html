@@ -1,0 +1,52 @@
+<div class="jumbotron mt-5" *ngFor="let e of event">
+    <div class="container" *ngIf="e.uid == uid; else noLogin">
+      <h2>Reporte de Evento</h2>
+      <h3>Evento: <small class="text-muted">{{e.nameEvent}}</small></h3>
+      <h3>Dirección: <small class="text-muted">{{e.address}}</small></h3>
+      <h3>Fecha: <small class="text-muted">{{e.date}}</small></h3>
+
+      <hr class="mt-3">
+      <h3><i class="fa fa-qrcode"></i> Total de Tickets QR leídos: <span class="text-info" *ngFor="let total of totalRead">{{total.total}}</span>
+
+      </h3>
+      <h3>Descargar <a class="btn btn-outline-success"  (click)="generarArchivo(e.idEvent)"><i class="fa fa-download"></i></a></h3>
+      <h3>Total Por Secciones</h3>
+      
+      <table id="entry-grid" datatable="ng" class="table table-hover">
+          <thead>
+            <tr align="left">
+                <th>-</th>
+                <th>Localidad</th>
+                <th>Sección</th>
+                <th>Tickets Escaneados</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr align="left" *ngFor="let totalSeccion of totalPerSection">
+                <td><i class="fa fa-ticket"></i>
+                </td>
+                <td>
+                    {{totalSeccion.localidad}}
+                </td>
+                <td>
+                    {{totalSeccion.sectionName}}
+                </td>
+                <td>
+                    {{totalSeccion.totalPerSection}} 
+                </td>
+              </tr>
+          </tbody>
+      </table>
+
+    
+
+
+    </div>
+  <ng-template #noLogin>
+      <div class="alert alert-dismissible alert-warning">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <h4 class="alert-heading">Warning!</h4>
+          <p class="mb-0">Este evento no pertenece a este usuario.</p>
+        </div>
+  </ng-template>
+</div>

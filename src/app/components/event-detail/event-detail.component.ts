@@ -26,7 +26,8 @@ import { Event } from '../../models/event';
 export class EventDetailComponent implements OnInit {
   closeResult: string;
   public idEvent:number;
-	public event: { idEvent: number, 
+	public event: { 
+		idEvent: number, 
 		nameEvent: string, 
 		date: string, 
 		address: string, 
@@ -38,6 +39,8 @@ export class EventDetailComponent implements OnInit {
 		seats: string,
 		idVenue: number}[]=[];
 	//public event:Event;
+	
+
 	public configurations=[];
 	public config=[];
 	public sections=[];
@@ -96,6 +99,12 @@ export class EventDetailComponent implements OnInit {
 		//console.log(this.event);
 		//console.log(this.event[0].active);
 		//this.status = this.event[0].active;
+		/*if(this.event[0].active==0){
+			this.status=false;
+		}else{
+			this.status=true;
+		}*/
+		
 		
   }
 
@@ -113,9 +122,11 @@ export class EventDetailComponent implements OnInit {
 	  });
   }
   changeStatus(){
-	  
+	
 	  this.status = !this.status;
-	  this._eventService.onUpdateEventStatus(this.status,this.idEvent).subscribe(
+	  let json={"active":this.status, "idEvent":this.idEvent};
+	  //this._eventService.onUpdateEventStatus(this.status,this.idEvent).subscribe(
+	  this._eventService.onUpdateEventStatus(json).subscribe(
 		response => {
 			////console.log(response);
 			if(response.code == 200){

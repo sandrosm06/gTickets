@@ -50,7 +50,9 @@ export class GenerateService {
 		return this._http.get(this.url+'get-tickets/'+idRow).map(res => res.json());
 	}
 
-	
+	getAllTicketsRead(idEvent: any){
+		return this._http.get(this.url+'getTicketRead/'+idEvent).map(res => res.json());
+	}
 	/*saveRows(rows[]){
 		////console.log(contactoProveedor);
 		let json = JSON.stringify(rows);

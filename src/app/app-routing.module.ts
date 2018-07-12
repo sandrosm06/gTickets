@@ -17,6 +17,8 @@ import { GenerateTicketsComponent } from './components/generate-tickets/generate
 import { EventsComponent } from './components/events/events.component';
 import { EventDetailComponent } from './components/event-detail/event-detail.component';
 import { EditConfigurationsComponent } from './components/edit-configurations/edit-configurations.component';
+import { ReportComponent } from './components/report/report.component';
+import { ValidatorComponent } from './components/validator/validator.component';
 
 
 const routes: Routes = [
@@ -34,6 +36,9 @@ const routes: Routes = [
   {path: 'generate-tickets/:idEvent', component: GenerateTicketsComponent, canActivate: [AuthGuard]},
   {path: 'events', component: EventsComponent, canActivate: [AuthGuard]},
   {path: 'event-detail/:idEvent', component: EventDetailComponent, canActivate: [AuthGuard]},
+  {path: 'report/:idEvent', component: ReportComponent, canActivate: [AuthGuard]},
+  {path: 'validador', component: ValidatorComponent, canActivate: [AuthGuard]},
+
   {path: '**', component: NotFoundPageComponent}
 ];
 

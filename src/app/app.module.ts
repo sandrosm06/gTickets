@@ -45,6 +45,9 @@ import { EventsComponent } from './components/events/events.component';
 import { EventDetailComponent } from './components/event-detail/event-detail.component';
 import { EditConfigurationsComponent } from './components/edit-configurations/edit-configurations.component';
 import { ModalChangeGenerateTicketsComponent } from './components/modal-change-generate-tickets/modal-change-generate-tickets.component';
+import { ReportComponent } from './components/report/report.component';
+import { ValidatorComponent } from './components/validator/validator.component';
+import { ValidatorService } from './services/validator.service';
 
 @NgModule({
   declarations: [
@@ -66,7 +69,9 @@ import { ModalChangeGenerateTicketsComponent } from './components/modal-change-g
     EventsComponent,
     EventDetailComponent,
     EditConfigurationsComponent,
-    ModalChangeGenerateTicketsComponent
+    ModalChangeGenerateTicketsComponent,
+    ReportComponent,
+    ValidatorComponent
   ],
   imports: [
     BrowserModule,
@@ -92,7 +97,8 @@ import { ModalChangeGenerateTicketsComponent } from './components/modal-change-g
     RowService,
     GenerateService,
     ExcelService,
-    BreadcrumbService
+    BreadcrumbService,
+    ValidatorService
   ],
   bootstrap: [AppComponent]
 })

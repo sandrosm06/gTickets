@@ -1,0 +1,21 @@
+<div class="jumbotron mt-3">
+  <h1>Validador Tickets</h1>
+  <div class="col-md-5">
+  Lector
+    <input type="text" [(ngModel)]="mymodel" (input)="validar($event)" [ngModelOptions]="{standalone: true}" />
+    <br>
+    Validando: {{mymodel}}
+    <br>
+    <button class="btn btn-warning" (click)="clear()">Clear</button>
+    
+    <br>
+    <div class="col-md-5" *ngIf="isValid;else other_content">
+        <span><i class="fa fa-thumbs-up fa-5x" style="color: green"><p>BOLETO VALIDO</p></i></span>
+    </div>
+    <div class="col-md-5">
+      <ng-template #other_content>
+        <span><i class="fa fa-times fa-5x" style="color:red"><p>Boleto No Valido</p></i></span>
+      </ng-template>
+    </div>
+</div>
+</div>

@@ -11,7 +11,8 @@ import { VenuesService } from '../../services/venues.service';
 })
 export class AddEventComponent implements OnInit {
 	//public event: Event;
-	public event: { idEvent: number, 
+	public event: { 
+		idEvent: number, 
 		nameEvent: string, 
 		date: string, 
 		address: string, 
@@ -21,7 +22,19 @@ export class AddEventComponent implements OnInit {
 		venue: string,
 		uid: string,
 		seats: string,
-		idVenue: number}[]=[];
+		idVenue: number}[]=[{
+			idEvent: 0, 
+			nameEvent: '', 
+			date: '', 
+			address: '', 
+			active: 0,
+			phone: '',
+			seatsVenue: '',
+			venue: '',
+			uid: '',
+			seats: '',
+			idVenue: 0
+		}];
 	public idVenue: number;
 	public venue=[];
 	
@@ -38,6 +51,7 @@ export class AddEventComponent implements OnInit {
   ngOnInit() {
     this.getIdVenue();
 		//this.event.Venue_idVenue=this.idVenue;
+		console.log(this,this.idVenue);
 		this.event[0].idVenue=this.idVenue;
 		this.getVenue();
   }
@@ -87,7 +101,7 @@ export class AddEventComponent implements OnInit {
 	getIdVenue(){
 		this._route.params.forEach((params: Params) => {
 			let id = params['idVenue'];
-			this.idVenue = id;
+			this.idVenue = parseInt(id);
 		});
 	}
 }

@@ -48,6 +48,11 @@ export class EventsComponent implements OnInit {
     //console.log(idEvent);
     this._router.navigate(["/event-detail/"+idEvent]);
   }
+
+  viewReport(idEvent:any){
+    //console.log(idEvent);
+    this._router.navigate(["/report/"+idEvent]);
+  }
   getEvents(){
     this._eventService.getEvent(this.uid).subscribe(
 			response => {

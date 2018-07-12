@@ -20,13 +20,14 @@
   
   <hr class="mt-3" />
 
+  <div *ngFor="let e of event">
   <form #formAddEvent="ngForm" (ngSubmit)="onSubmit()" id="form-add-event">
-    <div class="form-group">
+    <div class="form-group" >
       <label for="name">
         Nombre del Evento
         <span *ngIf="!name.valid && name.touched" class="badge badge-primary">El nombre del evento es obligatorio</span>
       </label>
-      <input class="form-control" type="text" #name="ngModel" id="name" name="name" [(ngModel)]="event.name" placeholder="Nombre del Evento" required="">
+      <input class="form-control" type="text" #name="ngModel" id="name" name="name" [(ngModel)]="e.nameEvent" placeholder="Nombre del Evento" required="">
     </div>
 
     <div class="form-group">
@@ -34,7 +35,7 @@
         Fecha
         <span *ngIf="!date.valid && date.touched" class="badge badge-primary">La Fecha del evento es obligatoria</span>
       </label>
-      <input class="form-control" type="text" #date="ngModel" id="date" name="date" [(ngModel)]="event.date" placeholder="fecha" required="">
+      <input class="form-control" type="text" #date="ngModel" id="date" name="date" [(ngModel)]="e.date" placeholder="fecha" required="">
     </div>
 
     <div class="form-group">
@@ -42,13 +43,13 @@
         Aforo del Evento
         <span *ngIf="!aforo.valid && aforo.touched" class="badge badge-primary">El Aforo es obligatorio</span>
       </label>
-      <input class="form-control" type="text" #aforo="ngModel" id="aforo" name="aforo" [(ngModel)]="event.aforo" placeholder="Aforo del evento" required="">
+      <input class="form-control" type="text" #aforo="ngModel" id="aforo" name="aforo" [(ngModel)]="e.seats" placeholder="Aforo del evento" required="">
     </div>
 
     <div class="form-group">
       <h3>Artistas</h3>
     </div>
-    <div class="form-group" *ngIf="+event.aforo <= +v.totalSeats; else noAforo">
+    <div class="form-group" *ngIf="+e.seats <= +v.totalSeats; else noAforo">
       <button type="submit" class="btn btn-default" [disabled]="!formAddEvent.form.valid" >Siguiente</button>
     </div>
     <ng-template #noAforo>
@@ -61,4 +62,5 @@
 
     </ng-template>
   </form>  
+</div>
 </div>
